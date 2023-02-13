@@ -12,7 +12,7 @@ func solve(){
     
     let n = Int(readLine()!)!
     var result = [Int]()
-    for i in 1...n{
+    for _ in 1...n{
         
         let m = Int(readLine()!)!
         
