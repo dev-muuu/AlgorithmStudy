@@ -55,17 +55,17 @@
 		EE532950299BAFF000C79CF2 /* Programmers */ = {
 			isa = PBXGroup;
 			children = (
-				EE532951299BB02900C79CF2 /* LV1 */,
+				EE532951299BB02900C79CF2 /* Lv1 */,
 			);
 			path = Programmers;
 			sourceTree = "<group>";
 		};
-		EE532951299BB02900C79CF2 /* LV1 */ = {
+		EE532951299BB02900C79CF2 /* Lv1 */ = {
 			isa = PBXGroup;
 			children = (
 				EE532952299BB2B400C79CF2 /* 12926.swift */,
 			);
-			path = LV1;
+			path = Lv1;
 			sourceTree = "<group>";
 		};
 		EEAEC892298CACDD001B1D62 = {
