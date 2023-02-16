@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		EEAEC89F298CACDD001B1D62 /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEAEC89E298CACDD001B1D62 /* main.swift */; };
 		EED11B51299E3A200043863E /* 비밀지도.swift in Sources */ = {isa = PBXBuildFile; fileRef = EED11B50299E3A200043863E /* 비밀지도.swift */; };
+		EED11B53299E45A20043863E /* 문자열 내 마음대로 정렬하기.swift in Sources */ = {isa = PBXBuildFile; fileRef = EED11B52299E45A20043863E /* 문자열 내 마음대로 정렬하기.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -33,6 +34,7 @@
 		EEAEC89B298CACDD001B1D62 /* AlgorithmReview */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = AlgorithmReview; sourceTree = BUILT_PRODUCTS_DIR; };
 		EEAEC89E298CACDD001B1D62 /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
 		EED11B50299E3A200043863E /* 비밀지도.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "비밀지도.swift"; sourceTree = "<group>"; };
+		EED11B52299E45A20043863E /* 문자열 내 마음대로 정렬하기.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "문자열 내 마음대로 정렬하기.swift"; sourceTree = "<group>"; };
 		EEF6F15D299A698B00BE2AEF /* 9095.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = 9095.swift; sourceTree = "<group>"; };
 		EEF6F15F299A6E6100BE2AEF /* 2579.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = 2579.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -71,6 +73,7 @@
 				EE661A3E299CFACE002904A7 /* 131705.swift */,
 				EE661A40299CFCBE002904A7 /* 86491.swift */,
 				EED11B50299E3A200043863E /* 비밀지도.swift */,
+				EED11B52299E45A20043863E /* 문자열 내 마음대로 정렬하기.swift */,
 			);
 			path = Lv1;
 			sourceTree = "<group>";
@@ -171,6 +174,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				EED11B53299E45A20043863E /* 문자열 내 마음대로 정렬하기.swift in Sources */,
 				EEAEC89F298CACDD001B1D62 /* main.swift in Sources */,
 				EED11B51299E3A200043863E /* 비밀지도.swift in Sources */,
 			);
