@@ -20,3 +20,7 @@ func solution(_ s:String) -> [Int] {
         return index - value
     }
 }
+
+func reference(_ s: String) -> [Int] {
+    return s.enumerated().map { (i, c) in i - (Array(s)[0..<i].lastIndex(of: c) ?? i + 1) }
+}
