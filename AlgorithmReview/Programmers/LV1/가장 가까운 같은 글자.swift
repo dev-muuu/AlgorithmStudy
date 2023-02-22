@@ -7,7 +7,7 @@
 
 import Foundation
 
-func solution(_ s:String) -> [Int] {
+func solution1(_ s:String) -> [Int] {
     var mapping = [Character: Int]()
     var index = -1
     return s.map{
@@ -18,6 +18,27 @@ func solution(_ s:String) -> [Int] {
         }
         mapping[$0] = index
         return index - value
+    }
+}
+
+func solution2(_ s:String) -> [Int] {
+    var mapping = [Character: Int]()
+    return s.enumerated().map{
+        guard let value = mapping[$1] else {
+            mapping[$1] = $0
+            return -1
+        }
+        mapping[$1] = $0
+        return $0 - value
+    }
+}
+
+func solution3(_ s:String) -> [Int] {
+    var mapping = [Character: Int]()
+    return s.enumerated().map{
+        let value = mapping[$1]
+        mapping[$1] = $0
+        return value == nil ? -1 : $0 - value!
     }
 }
 
