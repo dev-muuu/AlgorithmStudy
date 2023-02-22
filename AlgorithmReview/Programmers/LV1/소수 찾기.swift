@@ -7,7 +7,7 @@
 
 import Foundation
 
-func solution(_ n:Int) -> Int {
+func solution1(_ n:Int) -> Int {
     return (2...n).reduce(0){
         for i in 2..<$1{
             if($1 % i == 0){
@@ -15,5 +15,22 @@ func solution(_ n:Int) -> Int {
             }
         }
         return $0 + 1
+    }
+}
+
+func solution2(_ n:Int) -> Int {
+
+    var filter = [Bool](repeating: true, count: n+1)
+
+    return (2...n).reduce(0){ sum, num in
+        
+        if(!filter[num]){
+            return sum
+        }
+
+        _ = (1...n/num).map{ index in
+            filter[num * index] = false
+        }
+        return sum + 1
     }
 }
