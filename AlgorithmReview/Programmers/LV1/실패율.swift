@@ -9,20 +9,12 @@ import Foundation
 
 func solution(_ N:Int, _ stages:[Int]) -> [Int] {
     
-    var fail = [Float](repeating: 0, count: N+1)
-    var reach = [Float](repeating: 0, count: N+1)
+    var fail = [Float](repeating: 0, count: N+2)
+    var reach = [Float](repeating: 0, count: N+2)
     
     for i in stages{
-        
-        var end: Int
-        if(i > N){
-            end = N
-        }else{
-            end = i
-            fail[i] += 1
-        }
-        
-        for i in 1...end{
+        fail[i] += 1
+        for i in 1...i{
             reach[i] += 1
         }
     }
@@ -36,10 +28,7 @@ func solution(_ N:Int, _ stages:[Int]) -> [Int] {
     }
     
     return percentage.enumerated().sorted(by: {
-        if($0.element == $1.element){
-            return $0.offset < $1.offset
-        }
-        return $0.element > $1.element
+        $0.element == $1.element ? $0.offset < $1.offset : $0.element > $1.element
     }).map{
         $0.offset + 1
     }
