@@ -21,6 +21,7 @@ func solve(){
     
     var dp = [Int](repeating: 0, count: string.count+1)
     for i in 0..<string.count{
+        
         dp[i+1] = max(dp[i+1], dp[i] + 1)
         
         let filter = mapping.keys.filter{ i+$0.count <= string.count && $0 == String(string[i...i+$0.count-1])}
@@ -31,3 +32,17 @@ func solve(){
 
     print(dp[string.count])
 }
+
+/*
+ for i in 1...string.count+1{
+ 
+    dp[i] = max(dp[i-1], dp[i])
+ 
+    if(i == string.count + 1){
+      break
+    }
+ 
+    ...
+ 
+    dp[i] += 1
+ */
