@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		EE00BB7A29AC626B007CE728 /* 21941.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE00BB7929AC626B007CE728 /* 21941.swift */; };
+		EE00BB7C29AC71F4007CE728 /* FileIO.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE00BB7B29AC71F4007CE728 /* FileIO.swift */; };
 		EE06316A29A0DC3B00B3C79B /* K번째 수.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE06316929A0DC3B00B3C79B /* K번째 수.swift */; };
 		EE06316C29A0E08A00B3C79B /* 숫자 문자열과 영단어.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE06316B29A0E08A00B3C79B /* 숫자 문자열과 영단어.swift */; };
 		EEAEC89F298CACDD001B1D62 /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEAEC89E298CACDD001B1D62 /* main.swift */; };
@@ -31,6 +32,7 @@
 
 /* Begin PBXFileReference section */
 		EE00BB7929AC626B007CE728 /* 21941.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = 21941.swift; sourceTree = "<group>"; };
+		EE00BB7B29AC71F4007CE728 /* FileIO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileIO.swift; sourceTree = "<group>"; };
 		EE06313529A38485002830FB /* 2016년.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "2016년.swift"; sourceTree = "<group>"; };
 		EE06313729A38F02002830FB /* 2629.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = 2629.swift; sourceTree = "<group>"; };
 		EE06313929A39A8D002830FB /* 콜라 문제.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "콜라 문제.swift"; sourceTree = "<group>"; };
@@ -128,6 +130,7 @@
 			isa = PBXGroup;
 			children = (
 				EEAEC89E298CACDD001B1D62 /* main.swift */,
+				EE00BB7B29AC71F4007CE728 /* FileIO.swift */,
 				EE53294F299BAFDE00C79CF2 /* BOJ */,
 				EE532950299BAFF000C79CF2 /* Programmers */,
 			);
@@ -213,6 +216,7 @@
 				EE06316C29A0E08A00B3C79B /* 숫자 문자열과 영단어.swift in Sources */,
 				EEE1155229A8427E003FD4E3 /* 소수 만들기.swift in Sources */,
 				EE06316A29A0DC3B00B3C79B /* K번째 수.swift in Sources */,
+				EE00BB7C29AC71F4007CE728 /* FileIO.swift in Sources */,
 				EEAEC89F298CACDD001B1D62 /* main.swift in Sources */,
 				EEE1154D29A775C4003FD4E3 /* 모의고사.swift in Sources */,
 			);
