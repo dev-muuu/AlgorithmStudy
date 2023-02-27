@@ -13,6 +13,8 @@
 		EED11B53299E45A20043863E /* 문자열 내 마음대로 정렬하기.swift in Sources */ = {isa = PBXBuildFile; fileRef = EED11B52299E45A20043863E /* 문자열 내 마음대로 정렬하기.swift */; };
 		EED11B55299E491D0043863E /* 비밀지도.swift in Sources */ = {isa = PBXBuildFile; fileRef = EED11B54299E491D0043863E /* 비밀지도.swift */; };
 		EEE1154D29A775C4003FD4E3 /* 모의고사.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEE1154C29A775C4003FD4E3 /* 모의고사.swift */; };
+		EEE1154E29A79687003FD4E3 /* 2228.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEA997FA29A63D7E0063F86B /* 2228.swift */; };
+		EEE1155229A8427E003FD4E3 /* 소수 만들기.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEE1155129A8427E003FD4E3 /* 소수 만들기.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -50,6 +52,7 @@
 		EED11B52299E45A20043863E /* 문자열 내 마음대로 정렬하기.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "문자열 내 마음대로 정렬하기.swift"; sourceTree = "<group>"; };
 		EED11B54299E491D0043863E /* 비밀지도.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "비밀지도.swift"; sourceTree = "<group>"; };
 		EEE1154C29A775C4003FD4E3 /* 모의고사.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "모의고사.swift"; sourceTree = "<group>"; };
+		EEE1155129A8427E003FD4E3 /* 소수 만들기.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "소수 만들기.swift"; sourceTree = "<group>"; };
 		EEF6F15D299A698B00BE2AEF /* 9095.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = 9095.swift; sourceTree = "<group>"; };
 		EEF6F15F299A6E6100BE2AEF /* 2579.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = 2579.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -99,6 +102,7 @@
 				EEA997F629A6208E0063F86B /* 가장 가까운 같은 글자.swift */,
 				EEA997F829A6387F0063F86B /* 소수 찾기.swift */,
 				EEE1154C29A775C4003FD4E3 /* 모의고사.swift */,
+				EEE1155129A8427E003FD4E3 /* 소수 만들기.swift */,
 			);
 			path = Lv1;
 			sourceTree = "<group>";
@@ -204,9 +208,11 @@
 				EED11B53299E45A20043863E /* 문자열 내 마음대로 정렬하기.swift in Sources */,
 				EED11B55299E491D0043863E /* 비밀지도.swift in Sources */,
 				EE06316C29A0E08A00B3C79B /* 숫자 문자열과 영단어.swift in Sources */,
+				EEE1155229A8427E003FD4E3 /* 소수 만들기.swift in Sources */,
 				EE06316A29A0DC3B00B3C79B /* K번째 수.swift in Sources */,
 				EEAEC89F298CACDD001B1D62 /* main.swift in Sources */,
 				EEE1154D29A775C4003FD4E3 /* 모의고사.swift in Sources */,
+				EEE1154E29A79687003FD4E3 /* 2228.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
