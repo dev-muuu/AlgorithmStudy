@@ -7,16 +7,13 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		EE00BB7A29AC626B007CE728 /* 21941.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE00BB7929AC626B007CE728 /* 21941.swift */; };
 		EE00BB7C29AC71F4007CE728 /* FileIO.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE00BB7B29AC71F4007CE728 /* FileIO.swift */; };
-		EE00BB7E29AC8463007CE728 /* 실패율.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE00BB7D29AC8463007CE728 /* 실패율.swift */; };
+		EE00BBA529ADB45A007CE728 /* 다트 게임.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE00BBA429ADB45A007CE728 /* 다트 게임.swift */; };
 		EE06316A29A0DC3B00B3C79B /* K번째 수.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE06316929A0DC3B00B3C79B /* K번째 수.swift */; };
 		EE06316C29A0E08A00B3C79B /* 숫자 문자열과 영단어.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE06316B29A0E08A00B3C79B /* 숫자 문자열과 영단어.swift */; };
 		EEAEC89F298CACDD001B1D62 /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEAEC89E298CACDD001B1D62 /* main.swift */; };
 		EED11B53299E45A20043863E /* 문자열 내 마음대로 정렬하기.swift in Sources */ = {isa = PBXBuildFile; fileRef = EED11B52299E45A20043863E /* 문자열 내 마음대로 정렬하기.swift */; };
 		EED11B55299E491D0043863E /* 비밀지도.swift in Sources */ = {isa = PBXBuildFile; fileRef = EED11B54299E491D0043863E /* 비밀지도.swift */; };
-		EEE1154D29A775C4003FD4E3 /* 모의고사.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEE1154C29A775C4003FD4E3 /* 모의고사.swift */; };
-		EEE1155229A8427E003FD4E3 /* 소수 만들기.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEE1155129A8427E003FD4E3 /* 소수 만들기.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -35,6 +32,7 @@
 		EE00BB7929AC626B007CE728 /* 21941.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = 21941.swift; sourceTree = "<group>"; };
 		EE00BB7B29AC71F4007CE728 /* FileIO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileIO.swift; sourceTree = "<group>"; };
 		EE00BB7D29AC8463007CE728 /* 실패율.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "실패율.swift"; sourceTree = "<group>"; };
+		EE00BBA429ADB45A007CE728 /* 다트 게임.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "다트 게임.swift"; sourceTree = "<group>"; };
 		EE06313529A38485002830FB /* 2016년.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "2016년.swift"; sourceTree = "<group>"; };
 		EE06313729A38F02002830FB /* 2629.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = 2629.swift; sourceTree = "<group>"; };
 		EE06313929A39A8D002830FB /* 콜라 문제.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "콜라 문제.swift"; sourceTree = "<group>"; };
@@ -109,6 +107,7 @@
 				EEE1154C29A775C4003FD4E3 /* 모의고사.swift */,
 				EEE1155129A8427E003FD4E3 /* 소수 만들기.swift */,
 				EE00BB7D29AC8463007CE728 /* 실패율.swift */,
+				EE00BBA429ADB45A007CE728 /* 다트 게임.swift */,
 			);
 			path = Lv1;
 			sourceTree = "<group>";
@@ -214,15 +213,12 @@
 			buildActionMask = 2147483647;
 			files = (
 				EED11B53299E45A20043863E /* 문자열 내 마음대로 정렬하기.swift in Sources */,
-				EE00BB7A29AC626B007CE728 /* 21941.swift in Sources */,
 				EED11B55299E491D0043863E /* 비밀지도.swift in Sources */,
 				EE06316C29A0E08A00B3C79B /* 숫자 문자열과 영단어.swift in Sources */,
-				EEE1155229A8427E003FD4E3 /* 소수 만들기.swift in Sources */,
+				EE00BBA529ADB45A007CE728 /* 다트 게임.swift in Sources */,
 				EE06316A29A0DC3B00B3C79B /* K번째 수.swift in Sources */,
 				EE00BB7C29AC71F4007CE728 /* FileIO.swift in Sources */,
 				EEAEC89F298CACDD001B1D62 /* main.swift in Sources */,
-				EEE1154D29A775C4003FD4E3 /* 모의고사.swift in Sources */,
-				EE00BB7E29AC8463007CE728 /* 실패율.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
