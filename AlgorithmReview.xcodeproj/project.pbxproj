@@ -9,7 +9,6 @@
 /* Begin PBXBuildFile section */
 		EE00BB7C29AC71F4007CE728 /* FileIO.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE00BB7B29AC71F4007CE728 /* FileIO.swift */; };
 		EE00BBA529ADB45A007CE728 /* 다트 게임.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE00BBA429ADB45A007CE728 /* 다트 게임.swift */; };
-		EE00BBA729ADDA76007CE728 /* 21923.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE00BBA629ADDA76007CE728 /* 21923.swift */; };
 		EE00BBA929AE1657007CE728 /* 과일 장수.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE00BBA829AE1657007CE728 /* 과일 장수.swift */; };
 		EEAEC89F298CACDD001B1D62 /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEAEC89E298CACDD001B1D62 /* main.swift */; };
 /* End PBXBuildFile section */
@@ -31,7 +30,6 @@
 		EE00BB7B29AC71F4007CE728 /* FileIO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileIO.swift; sourceTree = "<group>"; };
 		EE00BB7D29AC8463007CE728 /* 실패율.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "실패율.swift"; sourceTree = "<group>"; };
 		EE00BBA429ADB45A007CE728 /* 다트 게임.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "다트 게임.swift"; sourceTree = "<group>"; };
-		EE00BBA629ADDA76007CE728 /* 21923.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = 21923.swift; sourceTree = "<group>"; };
 		EE00BBA829AE1657007CE728 /* 과일 장수.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "과일 장수.swift"; sourceTree = "<group>"; };
 		EE06313529A38485002830FB /* 2016년.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "2016년.swift"; sourceTree = "<group>"; };
 		EE06313729A38F02002830FB /* 2629.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = 2629.swift; sourceTree = "<group>"; };
@@ -151,7 +149,6 @@
 				EE06313729A38F02002830FB /* 2629.swift */,
 				EEA997FA29A63D7E0063F86B /* 2228.swift */,
 				EE00BB7929AC626B007CE728 /* 21941.swift */,
-				EE00BBA629ADDA76007CE728 /* 21923.swift */,
 			);
 			path = DynamicProgramming;
 			sourceTree = "<group>";
@@ -218,7 +215,6 @@
 				EE00BBA529ADB45A007CE728 /* 다트 게임.swift in Sources */,
 				EE00BB7C29AC71F4007CE728 /* FileIO.swift in Sources */,
 				EEAEC89F298CACDD001B1D62 /* main.swift in Sources */,
-				EE00BBA729ADDA76007CE728 /* 21923.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
