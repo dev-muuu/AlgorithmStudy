@@ -30,7 +30,7 @@ func solve(){
     var start = 0
     var end = 1
 
-    while(start < snowBall.count && end < snowBall.count){
+    while(end < snowBall.count){
         
         if(snowBall[end].id1 == snowBall[start].id1 || snowBall[end].id1 == snowBall[start].id2 || snowBall[end].id2 == snowBall[start].id1 || snowBall[end].id2 == snowBall[start].id2){
             end += 1
