@@ -35,3 +35,14 @@ func solution(_ X:String, _ Y:String) -> String {
 
     return result.isEmpty ? "-1" : result
 }
+
+func reference(_ X:String, _ Y:String) -> String {
+    let arr1 = Array(X)
+    let arr2 = Array(Y)
+    let uniqueKey = Set(arr1).intersection(Set(arr2))
+    var answer = ""
+    for key in uniqueKey.sorted(by: >) {
+        answer += String(repeating: key, count: min(arr1.filter{$0 == key}.count, arr2.filter{$0 == key}.count))
+    }
+    return answer == "" ? "-1" : ((uniqueKey.count == 1 && uniqueKey.contains("0")) ? "0" : answer)
+}
