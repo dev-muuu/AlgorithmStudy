@@ -7,7 +7,7 @@
 
 import Foundation
 
-func solution(_ cards1:[String], _ cards2:[String], _ goal:[String]) -> String {
+func solution1(_ cards1:[String], _ cards2:[String], _ goal:[String]) -> String {
 
     var card1Index = 0
     var card2Index = 0
@@ -43,5 +43,26 @@ func solution(_ cards1:[String], _ cards2:[String], _ goal:[String]) -> String {
         }
     }
 
+    return "Yes"
+}
+
+func solution2(_ cards1:[String], _ cards2:[String], _ goal:[String]) -> String {
+    
+    var card1Index = 0
+    var card2Index = 0
+    var goalIndex = 0
+    
+    while(goalIndex < goal.count){
+        if(card1Index < cards1.count && goal[goalIndex] == cards1[card1Index]){
+            card1Index += 1
+            goalIndex += 1
+        }else if(card2Index < cards2.count && goal[goalIndex] == cards2[card2Index]){
+            card2Index += 1
+            goalIndex += 1
+        }else{
+            return "No"
+        }
+    }
+    
     return "Yes"
 }
