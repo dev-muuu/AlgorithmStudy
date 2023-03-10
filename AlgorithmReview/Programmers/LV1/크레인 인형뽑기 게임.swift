@@ -8,10 +8,13 @@
 import Foundation
 
 func solution(_ board:[[Int]], _ moves:[Int]) -> Int {
+    
+    let row = board.count
+    let col = board[0].count
 
-    var rowPointer = [Int](repeating: board.count, count: board[0].count)
-    for i in 0..<board[0].count{
-        for j in 0..<board.count{
+    var rowPointer = [Int](repeating: row, count: col)
+    for i in 0..<col{
+        for j in 0..<row{
             if(board[j][i] != 0){
                 rowPointer[i] = j
                 break
@@ -20,22 +23,21 @@ func solution(_ board:[[Int]], _ moves:[Int]) -> Int {
     }
 
     var stack = [Int]()
-    var result = 0
-    for i in moves{
-        if(rowPointer[i-1] < board.count){
-            let newElement = board[rowPointer[i-1]][i-1]
-            rowPointer[i-1] += 1
-
+    
+    return moves.reduce(0){
+        let index = $1 - 1
+        if(rowPointer[index] < row){
+            let newElement = board[rowPointer[index]][index]
+            rowPointer[index] += 1
             if(!stack.isEmpty){
                 let last = stack.last!
                 if(last == newElement){
                     stack.removeLast()
-                    result += 2
-                    continue
+                    return $0 + 2
                 }
             }
             stack.append(newElement)
         }
+        return $0
     }
-    return result
 }
