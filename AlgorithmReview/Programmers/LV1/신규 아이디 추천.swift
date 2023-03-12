@@ -36,11 +36,7 @@ func solution(_ new_id:String) -> String {
     if(convertId.last ?? "" == "."){
         convertId.removeLast()
     }
-
-    //5단계
-    if(convertId.isEmpty){
-        convertId.append("a")
-    }
+    
     //6단계
     if(convertId.count > 15){
         convertId = Array(convertId[0..<15])
@@ -48,7 +44,7 @@ func solution(_ new_id:String) -> String {
             convertId.removeLast()
         }
     }else if(convertId.count < 3){
-        convertId += [String](repeating: convertId.last!, count: 3 - convertId.count)
+        convertId += [String](repeating: convertId.last ?? "a", count: 3 - convertId.count)
     }
     return convertId.joined()
 }
