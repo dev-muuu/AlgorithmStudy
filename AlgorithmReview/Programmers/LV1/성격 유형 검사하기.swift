@@ -16,7 +16,7 @@ func getScore(_ choice: Int) -> Int{
     }
 }
 
-func solution(_ survey:[String], _ choices:[Int]) -> String {
+func solution1(_ survey:[String], _ choices:[Int]) -> String {
 
     var mapping = [("R", "T"), ("C","F"),("J","M"),("A","N")]
     var scoreCount: [String:Int] = ["R":0, "T":0,"C":0,"F":0,"J":0,"M":0,"A":0,"N":0]
@@ -47,4 +47,36 @@ func solution(_ survey:[String], _ choices:[Int]) -> String {
         }
     }
     return result.joined()
+}
+
+
+func solution2(_ survey:[String], _ choices:[Int]) -> String {
+    
+    var mapping = [("R", "T"), ("C","F"),("J","M"),("A","N")]
+    var scoreCount: [String:Int] = ["R":0, "T":0,"C":0,"F":0,"J":0,"M":0,"A":0,"N":0]
+
+    for i in 0..<survey.count{
+        let character = Array(survey[i]).map{ String($0) }
+        let score = getScore(choices[i])
+        switch choices[i]{
+            case 1,2,3: //비동의
+            scoreCount[character[0]]! += score; break
+            case 5,6,7: //동의
+            scoreCount[character[1]]! += score; break
+            default:
+            break
+        }
+    }
+
+    return mapping.map{
+        let type1 = $0.0
+        let type2 = $0.1
+        if(scoreCount[type1]! > scoreCount[type2]!){
+            return type1
+        }else if(scoreCount[type1]! < scoreCount[type2]!){
+            return type2
+        }else{
+            return type1 < type2 ? type1 : type2
+        }
+    }.joined()
 }
