@@ -37,7 +37,7 @@ func solution(_ new_id:String) -> String {
         convertId.removeLast()
     }
     
-    //6단계
+    //5,6단계
     if(convertId.count > 15){
         convertId = Array(convertId[0..<15])
         if(convertId.last! == "."){
