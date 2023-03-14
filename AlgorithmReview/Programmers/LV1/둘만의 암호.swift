@@ -16,3 +16,15 @@ func solution(_ s:String, _ skip:String, _ index:Int) -> String {
     }
     return result.joined()
 }
+
+func reference(_ s:String, _ skip:String, _ index:Int) -> String {
+    let arr = (0...25)
+    .map { String(UnicodeScalar($0 + 97)) }
+    .filter { !skip.contains($0) }
+
+    return s
+    .map {
+        arr[arr.index(arr.firstIndex(of: String($0))!, offsetBy: index) % arr.count]
+    }
+    .joined()
+}
