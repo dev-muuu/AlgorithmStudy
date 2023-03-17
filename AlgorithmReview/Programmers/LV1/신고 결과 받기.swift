@@ -14,13 +14,13 @@ func solution(_ id_list:[String], _ report:[String], _ k:Int) -> [Int] {
         idMapping[id] = idx
     }
 
-    var reports = [String: Set<Int>]()
-    for i in report{
+    var reports = [String: [Int]]()
+    for i in Set(report){
         let info = i.split(separator: " ").map{ String($0) }
         if(reports[info[1]] == nil){
-            reports[info[1]] = Set<Int>()
+            reports[info[1]] = []
         }
-        reports[info[1]]!.insert(idMapping[info[0]]!)
+        reports[info[1]]!.append(idMapping[info[0]]!)
     }
 
     var result = [Int](repeating: 0, count: id_list.count)
