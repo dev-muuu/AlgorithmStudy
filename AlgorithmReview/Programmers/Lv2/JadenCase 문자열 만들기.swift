@@ -7,7 +7,7 @@
 
 import Foundation
 
-func solution(_ s:String) -> String {
+func solution1(_ s:String) -> String {
 
     var result = ""
     var isBlank = true
@@ -22,6 +22,15 @@ func solution(_ s:String) -> String {
             isBlank = true
         }
         result.write("\(i.lowercased())")
+    }
+    return result
+}
+
+func solution2(_ s:String) -> String {
+    
+    var result = ""
+    for i in s{
+        i != " " && (result.last ?? " ") == " " ? result.write("\(i.uppercased())") : result.write("\(i.lowercased())")
     }
     return result
 }
