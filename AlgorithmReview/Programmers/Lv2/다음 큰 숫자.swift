@@ -30,6 +30,5 @@ func solution(_ n:Int) -> Int {
         }
         answer += 1
     }
-
     return answer
 }
