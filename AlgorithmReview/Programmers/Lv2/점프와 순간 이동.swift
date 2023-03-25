@@ -22,3 +22,17 @@ func solution1(_ n:Int) -> Int {
     }
     return dp[n]!
 }
+
+func solution2(_ n:Int) -> Int {
+    var n = n
+    var count = 0
+    while(n > 0){
+        if(n % 2 == 0){
+            n /= 2
+        }else{
+            n -= 1
+            count += 1
+        }
+    }
+    return count
+}
