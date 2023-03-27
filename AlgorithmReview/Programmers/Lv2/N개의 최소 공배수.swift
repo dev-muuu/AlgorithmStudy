@@ -31,3 +31,16 @@ func solution(_ arr:[Int]) -> Int {
     }
     return candidate.first!
 }
+
+func reference(_ arr:[Int]) -> Int {
+    func gcdOfTwoNumbers(_ a: Int, _ b: Int) -> Int {
+        let r = a % b
+        return r != 0 ? gcdOfTwoNumbers(b, r) : b
+    }
+
+    func lcmOfTwoNumbers(_ a: Int, _ b: Int) -> Int {
+        return a * b / gcdOfTwoNumbers(a, b)
+    }
+    
+    return arr.reduce(1){ lcmOfTwoNumbers($0, $1) }
+}
