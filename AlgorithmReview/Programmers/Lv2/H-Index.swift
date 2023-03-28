@@ -18,3 +18,12 @@ func solution(_ citations:[Int]) -> Int {
     }
     return min(sort.count, sort.last!)
 }
+
+func reference(_ citations:[Int]) -> Int {
+    for (index, cit) in citations.sorted(by: >).enumerated() {
+        if index >= cit {
+            return index
+        }
+    }
+    return citations.count
+}
