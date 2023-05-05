@@ -36,3 +36,27 @@ func solution(_ n:Int, _ computers:[[Int]]) -> Int {
     
     return network
 }
+
+func reference(_ n:Int, _ computers:[[Int]]) -> Int {
+    
+    var visit: [Bool] = Array(repeating: false, count: n)
+    var answer: Int = 0
+
+    func dfs(_ vertax: Int) {
+        visit[vertax] = true
+        for i in 0..<n {
+            if computers[vertax][i] == 1 && visit[i] == false {
+                dfs(i)
+            }
+        }
+    }
+
+    for i in 0..<n {
+        if !visit[i] {
+            answer += 1
+            dfs(i)
+        }
+    }
+
+    return answer
+}
