@@ -17,7 +17,7 @@ func solution(_ str1:String, _ str2:String) -> Int {
         for i in 0..<str.count-1{
 
             if !(str[i].asciiValue! >= 97 && str[i].asciiValue! <= 122
-            && str[i+1].asciiValue! >= 97 && str[i+1].asciiValue! <= 122){ //"_" 아스키 코드 = 95 > 제외 필요
+            && str[i+1].asciiValue! >= 97 && str[i+1].asciiValue! <= 122){
                 continue
             }
 
@@ -47,3 +47,9 @@ func solution(_ str1:String, _ str2:String) -> Int {
     let ans: Double = union == 0 ? 1 : Double(intersection) / Double(union)
     return Int(ans * 65536)
 }
+
+private extension Character{
+     var isAlphabet: Bool{
+         self.asciiValue! >= 97 && self.asciiValue! <= 122
+     }
+ }
