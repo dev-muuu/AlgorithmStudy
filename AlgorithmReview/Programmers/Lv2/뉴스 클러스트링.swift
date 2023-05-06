@@ -16,8 +16,8 @@ func solution(_ str1:String, _ str2:String) -> Int {
 
         for i in 0..<str.count-1{
 
-            if !(str[i].asciiValue! >= 95 && str[i].asciiValue! <= 122
-            && str[i+1].asciiValue! >= 95 && str[i+1].asciiValue! <= 122) || str[i] == "_"{ //"_" 아스키 코드 = 95 > 제외 필요
+            if !(str[i].asciiValue! >= 97 && str[i].asciiValue! <= 122
+            && str[i+1].asciiValue! >= 97 && str[i+1].asciiValue! <= 122){ //"_" 아스키 코드 = 95 > 제외 필요
                 continue
             }
 
