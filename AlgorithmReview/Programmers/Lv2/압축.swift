@@ -38,3 +38,27 @@ func solution(_ msg:String) -> [Int] {
 
     return ans
 }
+
+func reference(_ msg:String) -> [Int] {
+    var dic = [String:Int]()
+    for i in (1...26) {
+        dic[String(UnicodeScalar(i + 64)!)] = i
+    }
+
+    var key = ""
+    var iter = msg.makeIterator()
+    var encoded = [Int]()
+    while let c = iter.next() {
+        let newKey = key + String(c)
+        if dic[newKey] != nil {
+            key.append(c)
+        } else {
+            dic[newKey] = dic.count + 1
+            encoded.append(dic[key]!)
+            key = String(c)
+        }
+    }
+    encoded.append(dic[key]!)
+
+    return encoded
+}
