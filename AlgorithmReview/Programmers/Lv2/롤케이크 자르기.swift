@@ -7,7 +7,7 @@
 
 import Foundation
 
-func solution(_ topping:[Int]) -> Int {
+func solution1(_ topping:[Int]) -> Int {
 
     var toppingCount = [Int](repeating: 0, count: 10001)
     for i in topping{
@@ -15,6 +15,30 @@ func solution(_ topping:[Int]) -> Int {
     }
     
     var bigSet = Set<Int>(), smallSet = Set<Int>(topping)
+    var ans = 0
+    for i in topping{
+        bigSet.insert(i)
+        toppingCount[i] -= 1
+        if toppingCount[i] == 0 {
+            smallSet.remove(i)
+        }
+        if bigSet.count == smallSet.count {
+            ans += 1
+        }
+    }
+    return ans
+}
+
+func solution2(_ topping:[Int]) -> Int {
+
+    var toppingCount = [Int](repeating: 0, count: 10001)
+    var smallSet = Set<Int>()
+    for i in topping{
+        toppingCount[i] += 1
+        smallSet.insert(i)
+    }
+    
+    var bigSet = Set<Int>()
     var ans = 0
     for i in topping{
         bigSet.insert(i)
