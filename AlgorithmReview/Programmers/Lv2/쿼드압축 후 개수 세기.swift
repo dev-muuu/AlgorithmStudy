@@ -29,6 +29,6 @@ func solution(_ arr:[[Int]]) -> [Int] {
         }
         return temp
     }
-    
+
     return dfs(0,0,arr.count)
 }
