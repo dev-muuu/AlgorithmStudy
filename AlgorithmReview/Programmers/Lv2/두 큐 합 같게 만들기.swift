@@ -14,7 +14,7 @@ func solution(_ queue1:[Int], _ queue2:[Int]) -> Int {
     var sum2 = 0; for i in queue2{ sum2 += i }
     var pointer1 = 0, pointer2 = 0
 
-    while pointer1 < queue1.count && pointer2 < queue2.count {
+    while pointer1 < queue1.count && pointer2 < queue2.count && pointer1 + pointer2 <= 600000 {
         if sum2 > sum1 {
             let pop = queue2[pointer2]
             sum1 += pop
@@ -30,6 +30,30 @@ func solution(_ queue1:[Int], _ queue2:[Int]) -> Int {
         } else {
             return pointer1 + pointer2
         }
+    }
+    return -1
+}
+
+func reference(_ queue1:[Int], _ queue2:[Int]) -> Int {
+    
+    var queue = queue1 + queue2
+    var sum1 = 0; for i in queue1{ sum1 += i }
+    var sum2 = 0; for i in queue2{ sum2 += i }
+    
+    let mid = (sum1 + sum2) / 2
+    var pointer1 = 0, pointer2 = queue1.count
+    var count = 0
+    while pointer1 <= pointer2 && pointer2 < queue.count {
+        if sum1 > mid {
+            sum1 -= queue[pointer1]
+            pointer1 += 1
+        } else if sum1 < mid {
+            sum1 += queue[pointer2]
+            pointer2 += 1
+        } else {
+            return count
+        }
+        count += 1
     }
     return -1
 }
