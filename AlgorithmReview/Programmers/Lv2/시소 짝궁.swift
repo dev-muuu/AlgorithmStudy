@@ -18,7 +18,7 @@ func solution(_ weights:[Int]) -> Int {
         }
     }
     
-    func combination(_ n: Int, _ r: Int = 2) -> Int{
+    func combination(_ n: Int) -> Int{
         return n * (n-1) / 2
     }
     
