@@ -71,3 +71,51 @@ func solution(_ maps:[String]) -> Int {
     
     return ans == Int.max ? -1 : ans
 }
+
+func solution(_ maps:[String]) -> Int {
+    
+    let maps = maps.map{ Array($0) }
+    
+    func isCoordinateValid(_ x: Int, _ y: Int) -> Bool{
+        x >= 0 && x < maps.count && y >= 0 && y < maps[0].count
+    }
+    
+    func move(_ start: Character, _ end: Character) -> Int{
+        
+        var queue = [(Int, Int, Int)]()
+        var visit = [[Bool]](repeating: [Bool](repeating: false, count: maps[0].count), count: maps.count)
+        
+        for row in maps.enumerated() {
+            for col in row.element.enumerated() {
+                if col.element == start {
+                    queue.append((row.offset, col.offset, 1))
+                    visit[row.offset][col.offset] = true
+                    break
+                }
+                
+            }
+            if !queue.isEmpty { break }
+        }
+        
+        while !queue.isEmpty{
+            let current = queue.removeFirst()
+            for coord in [(-1,0), (0,-1), (0,1), (1,0)] {
+                let newX = current.0+coord.0, newY = current.1+coord.1
+                 if isCoordinateValid(newX, newY) && maps[newX][newY] != "X" && !visit[newX][newY]{
+                     if maps[newX][newY] == end {
+                         return current.2
+                     }
+                     visit[newX][newY] = true
+                     queue.append((newX, newY, current.2 + 1))
+                 }
+            }
+        }
+        
+        return -1
+    }
+    
+    let first = move("S", "L")
+    if first == -1 { return -1 }
+    let second = move("L", "E")
+    return second == -1 ? -1 : first + second
+}
