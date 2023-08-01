@@ -46,7 +46,8 @@ func solution(_ relation:[[String]]) -> Int {
         var isCandidate = true
         for i in stride(from: index+1, to: tempAns.count, by: +1){
             let standard = tempAns[i]
-             if standard.intersection(target) == standard { isCandidate = false; break }
+//             if standard.intersection(target) == standard { isCandidate = false; break }
+            if standard.isSubset(of: target){ isCandidate = false; break }
         }
         if isCandidate { ans += 1 }
         index += 1
