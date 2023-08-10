@@ -52,7 +52,7 @@ func solution(_ board:[String]) -> Int {
         if isEnd() {
             if board == checking { ans = true }
             return
-        } else if count == coordO.count + coordX.count && board == checking {
+        } else if count == coordO.count + coordX.count{
             ans = true; return
         }
         
