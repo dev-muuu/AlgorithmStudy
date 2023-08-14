@@ -7,4 +7,4 @@
 
 import Foundation
 
-solution()
+//solution("100-200*300-500+20")
