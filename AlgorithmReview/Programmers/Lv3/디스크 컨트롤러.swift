@@ -41,6 +41,7 @@ func python(){
     import queue
 
     class Task:
+                    
         def __init__(self, start, during):
             self.start = start
             self.during = during
@@ -49,10 +50,7 @@ func python(){
             return self.start < other.start if self.during == other.during else self.during < other.during
         
     def solution(jobs):
-        
-        def custom_sort(l, r):
-            return l[1] < r[1] if l[0] == r[0] else l[0] < r[0]
-        
+
         jobs.sort(key = lambda x:(x[0], x[1]))
         
         sum = jobs[0][1]
