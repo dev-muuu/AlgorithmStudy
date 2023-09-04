@@ -7,7 +7,7 @@
 
 import Foundation
 
-func reference(_ s:String) -> Int{
+func answer(_ s:String) -> Int{
     var string = Array(s)
     var result = [Character]()
     for i in 0..<s.count{
@@ -18,4 +18,22 @@ func reference(_ s:String) -> Int{
         }
     }
     return result.isEmpty ? 1 : 0
+}
+
+func timeout(_ s:String) -> Int{
+    var s = Array(s)
+    var index = s.count-1
+    while index > 0 {
+        if s[index] == s[index-1] {
+            if index-2 < 0 {
+                return s.count > 2 ? 0 : 1
+            }
+            s.remove(at: index-1)
+            s.remove(at: index-1)
+            index = index-1 == s.count ? index-2 : index-1
+        } else {
+            index -= 1
+        }
+    }
+    return s.isEmpty ? 1 : 0
 }
