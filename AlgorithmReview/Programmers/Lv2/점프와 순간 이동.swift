@@ -8,7 +8,7 @@
 import Foundation
 
 //효율성 테스트 시간 초과
-func solution1(_ n:Int) -> Int {
+func timeout(_ n:Int) -> Int {
     var dp = [Int?](repeating: nil, count: n+1)
     dp[0] = 0
     dp[1] = 1
@@ -23,16 +23,15 @@ func solution1(_ n:Int) -> Int {
     return dp[n]!
 }
 
-func solution2(_ n:Int) -> Int {
-    var n = n
-    var count = 0
-    while(n > 0){
-        if(n % 2 == 0){
+func solution(_ n:Int) -> Int {
+    var n = n, ans = 0
+    while n != 0 {
+        if n % 2 == 0 {
             n /= 2
-        }else{
+        } else {
             n -= 1
-            count += 1
+            ans += 1
         }
     }
-    return count
+    return ans
 }
