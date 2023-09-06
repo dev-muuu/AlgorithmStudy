@@ -8,15 +8,10 @@
 import Foundation
 
 func solution(_ n:Int, _ left:Int64, _ right:Int64) -> [Int] {
-    
-    let left = Int(left)
-    let right = Int(right)
-
     var ans = [Int]()
-    for i in left...right{
-        let row = i / n
-        let col = i % n
-        ans.append(max(row, col) + 1)
+    for i in Int(left)...Int(right) {
+        let (row, col) = (i/n+1, i%n+1)
+        ans.append(max(row, col))
     }
     return ans
 }
