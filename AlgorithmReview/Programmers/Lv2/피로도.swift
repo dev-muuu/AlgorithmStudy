@@ -37,3 +37,36 @@ func solution(_ k:Int, _ dungeons:[[Int]]) -> Int {
     permutation(node: 0, array: [])
     return ans
 }
+
+
+func solution(_ k:Int, _ dungeons:[[Int]]) -> Int {
+    var visit = [Bool](repeating: false, count: dungeons.count)
+    func combination(_ array: [Int]){
+        if array.count == dungeons.count {
+            calculate(array); return
+        }
+        for i in 0..<dungeons.count {
+            if !visit[i] {
+                visit[i] = true
+                combination(array + [i])
+                visit[i] = false
+            }
+        }
+    }
+    
+    var ans = 0
+    func calculate(_ array: [Int]){
+        var k = k
+        var round = 0
+        for i in array {
+            let p = dungeons[i]
+            if p[0] > k { break }
+            round += 1
+            k -= p[1]
+        }
+        ans = max(round, ans)
+    }
+    
+    combination([])
+    return ans
+}
