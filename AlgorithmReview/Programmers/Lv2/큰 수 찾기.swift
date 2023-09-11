@@ -8,18 +8,16 @@
 import Foundation
 
 func solution(_ number:String, _ k:Int) -> String {
-
-    var stack = [String]()
-    for (i, element) in number.enumerated(){
-        let num = String(element)
-        while stack.count > i - k && !stack.isEmpty && stack.last! < num {
-            stack.removeLast()
+    let number = Array(number).map{ String($0) }
+    var ans = [String]()
+    for (i,c) in number.enumerated() {
+        while !ans.isEmpty && ans.last! < c && ans.count + number.count-i > number.count-k{
+            ans.removeLast()
         }
-        stack.append(num)
+        ans.append(c)
     }
-
-    if stack.count > number.count - k{ //stack 크기가 초과한 경우, 제거
-        stack.removeLast()
+    if ans.count > number.count-k {
+        ans.removeLast()
     }
-    return stack.joined()
+    return ans.joined()
 }
