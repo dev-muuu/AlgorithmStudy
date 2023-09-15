@@ -7,7 +7,7 @@
 
 import Foundation
 
-func solution(_ storey:Int) -> Int {
+func reference(_ storey:Int) -> Int {
     var storey = String(storey).map{ Int(String($0))! }
     var ans = 0
     for i in stride(from: storey.count-1, to: -1, by: -1){
@@ -26,4 +26,29 @@ func solution(_ storey:Int) -> Int {
         }
     }
     return ans
+}
+
+func solution(_ storey:Int) -> Int {
+    
+    let storey = String(storey).map{ Int(String($0))! }
+    
+    func value(_ standard: Int) -> Int {
+        var index = storey.count-1
+        var storey = storey
+        while index > 0 {
+            if storey[index] > standard {
+                storey[index-1] += 1
+                storey[index] = 10 - storey[index]
+            }
+            index -= 1
+        }
+        var start = 0
+        if storey[0] > standard {
+            start = 1
+            storey[0] = 10 - storey[0]
+        }
+        return storey.reduce(start){ $0 + $1 }
+    }
+    
+    return min(value(4), value(5))
 }
