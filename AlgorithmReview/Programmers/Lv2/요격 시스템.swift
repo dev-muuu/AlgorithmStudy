@@ -7,7 +7,7 @@
 
 import Foundation
 
-func solution(_ targets:[[Int]]) -> Int {
+func reference(_ targets:[[Int]]) -> Int {
     var targets = targets.sorted(by: { $0[1] == $1[1] ? $0[0] < $1[0] : $0[1] < $1[1] })
     var s = 0, e = 0
     var ans = 0
@@ -16,6 +16,20 @@ func solution(_ targets:[[Int]]) -> Int {
             ans += 1
             s = i[0]
             e = i[1]
+        }
+    }
+    return ans
+}
+
+func solution(_ targets:[[Int]]) -> Int {
+    let targets = targets.sorted(by: { $0[0] == $1[0] ? $0[1] < $1[1] : $0[0] < $1[0] })
+    var ans = 0, coord = (-1,0)
+    for m in targets{
+        if m[1] < coord.1 {
+            coord.1 = m[1]
+        } else if m[0] >= coord.1 {
+            coord = (m[0], m[1])
+            ans += 1
         }
     }
     return ans
