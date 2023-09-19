@@ -7,42 +7,43 @@
 
 import Foundation
 
-func solution(_ info:[String], _ query:[String]) -> [Int] {
+func timeout(_ info:[String], _ query:[String]) -> [Int] {
     
-    var defaultSet = Set<Int>()
-    for i in (0...info.count-1) { defaultSet.insert(i) }
-    
-    var information = [String : Set<Int>]()
-    ["cpp", "java", "python", "backend", "frontend", "junior", "senior", "chicken", "pizza"].forEach {
-        information[$0] = Set()
-    }
-
-    var score = [Int]()
-    for (id, i) in info.enumerated() {
-        let split = i.split(separator: " ").map{ String($0) }
-        for s in 0...3 {
-            information[split[s]]!.insert(id)
+    let comb = [[],[1],[2],[3],[4],[1,2],[1,3],[1,4],[2,3],[2,4],[3,4],[1,2,3],[1,2,4],[1,3,4],[2,3,4],[1,2,3,4]]
+    func makeQ(_ info: [String], _ score: Int) {
+        for c in comb {
+            var q = info
+            for i in c {
+                q[i-1] = "-"
+            }
+            let que = q.joined()
+            if dict[que] == nil {
+                dict[que] = []
+            }
+            dict[que]!.append(score)
         }
-        score.append(Int(split.last!)!)
     }
 
+    var dict = [String:[Int]]()
+    for i in info {
+        var split = i.split(separator: " ").map{ String($0) }
+        let scoreS = split.removeLast()
+        let score = Int(scoreS)!
+        makeQ(split, score)
+    }
+    
     var ans = [Int]()
     for q in query {
-        let splitQuery = q.replacingOccurrences(of: "and", with: "")
-                          .replacingOccurrences(of: "-", with: "")
-                          .split(separator: " ")
-                          .map { String($0) }
-        
-        let hasNumber = Int(splitQuery.last!) != nil
-        var intersection = defaultSet
-        for i in stride(from: 0, to: hasNumber ? splitQuery.count - 1 : splitQuery.count ,by: +1){
-            intersection = intersection.intersection(information[splitQuery[i]]!)
+        var q = q.replacingOccurrences(of: " and ", with: " ").split(separator: " ")
+        let targetS = Int(q.removeLast())!
+        let targetQ = q.joined()
+        let scores = (dict[targetQ] ?? []).sorted()
+
+        var index = 0
+        while index < scores.count && scores[index] < targetS {
+            index += 1
         }
-        if hasNumber {
-            let numQuery = Int(splitQuery.last!)!
-            intersection = intersection.filter{ score[$0] >= numQuery }
-        }
-        ans.append(intersection.count)
+        ans.append(scores.count-index)
     }
     return ans
 }

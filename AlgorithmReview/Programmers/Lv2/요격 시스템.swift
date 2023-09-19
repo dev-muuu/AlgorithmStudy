@@ -21,9 +21,10 @@ func reference(_ targets:[[Int]]) -> Int {
     return ans
 }
 
+//반례: [[0, 4], [1, 2], [1, 3], [3, 4]] -> 2
 func solution(_ targets:[[Int]]) -> Int {
     let targets = targets.sorted(by: { $0[0] == $1[0] ? $0[1] < $1[1] : $0[0] < $1[0] })
-    var ans = 0, coord = (-1,0)
+    var ans = 0, coord = (-1, 0)
     for m in targets{
         if m[1] < coord.1 {
             coord.1 = m[1]
