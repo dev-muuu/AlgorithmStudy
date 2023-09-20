@@ -7,7 +7,7 @@
 
 import Foundation
 
-func timeout(_ info:[String], _ query:[String]) -> [Int] {
+func solution(_ info:[String], _ query:[String]) -> [Int] {
     
     let comb = [[],[1],[2],[3],[4],[1,2],[1,3],[1,4],[2,3],[2,4],[3,4],[1,2,3],[1,2,4],[1,3,4],[2,3,4],[1,2,3,4]]
     func makeQ(_ info: [String], _ score: Int) {
@@ -27,9 +27,11 @@ func timeout(_ info:[String], _ query:[String]) -> [Int] {
     var dict = [String:[Int]]()
     for i in info {
         var split = i.split(separator: " ").map{ String($0) }
-        let scoreS = split.removeLast()
-        let score = Int(scoreS)!
+        let score = Int(split.removeLast())!
         makeQ(split, score)
+    }
+    for (k, v) in dict {
+        dict[k] = v.sorted()
     }
     
     var ans = [Int]()
@@ -37,13 +39,18 @@ func timeout(_ info:[String], _ query:[String]) -> [Int] {
         var q = q.replacingOccurrences(of: " and ", with: " ").split(separator: " ")
         let targetS = Int(q.removeLast())!
         let targetQ = q.joined()
-        let scores = (dict[targetQ] ?? []).sorted()
+        let scores = (dict[targetQ] ?? [])
 
-        var index = 0
-        while index < scores.count && scores[index] < targetS {
-            index += 1
+        var l = 0, r = scores.count-1
+        while l <= r {
+            let mid = (l+r)/2
+            if scores[mid] < targetS {
+                l = mid+1
+            } else {
+                r = mid-1
+            }
         }
-        ans.append(scores.count-index)
+        ans.append(scores.count-l)
     }
     return ans
 }
