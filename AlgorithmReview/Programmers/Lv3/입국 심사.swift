@@ -8,21 +8,20 @@
 import Foundation
 
 func solution(_ n:Int, _ times:[Int]) -> Int {
-    var ans = 0
-    var left = 1, right = times.max()! * n
-    while left <= right {
-        var mid = (left + right) / 2
-        var people = 0
-        for time in times{
-            people += mid / time
-            if people >= n { break }
+    var l = 1, r = times.max()! * n
+    var ans = r
+    while l <= r {
+        let mid = (l+r)/2
+        var p = 0
+        for t in times {
+            p += mid/t
+            if p >= n { break }
         }
-        if people >= n{
-            ans = mid
-            right = mid - 1
-        }
-        else if people < n{
-            left = mid + 1
+        if p >= n {
+            ans = min(ans, mid)
+            r = mid-1
+        } else {
+            l = mid+1
         }
     }
     return ans
