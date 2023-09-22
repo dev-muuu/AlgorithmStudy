@@ -9,39 +9,43 @@ import Foundation
 
 func solution(_ m:String, _ musicinfos:[String]) -> String {
     
-    func makeTime(_ string: String) -> Int{
-        let time = string.split(separator: ":").map{ Int($0)! }
-        return time[0] * 60 + time[1]
-    }
+    let m = replace(m)
     
-    func replacing(_ string: String) -> String{
-        return string
-            .replacingOccurrences(of: "C#", with: "c")
-            .replacingOccurrences(of: "D#", with: "d")
-            .replacingOccurrences(of: "F#", with: "f")
-            .replacingOccurrences(of: "G#", with: "g")
-            .replacingOccurrences(of: "A#", with: "a")
-    }
-    
-    var ans = ("(None)", 0)
-    var m = replacing(m)
-    
-    for music in musicinfos{
+    func check(_ time: Int, _ music: String) -> Bool {
         
-        var music = music.split(separator: ",").map{ String($0) }
-        music[3] = replacing(music[3])
+        var music = replace(music)
+        music = String(repeating: music, count: time/music.count+1)
+        music = String(music.prefix(time))
         
-        let time = makeTime(music[1]) - makeTime(music[0]) + 1
-        if time < m.count {
-            continue
+        if music.contains(m) && ans.0 < time {
+            return true
         }
+        return false
+    }
+    
+    var ans = (0, "(None)")
+    
+    for m in musicinfos{
+        let info = m.split(separator: ",").map{ String($0) }
+        let time = convertTime(info[1]) - convertTime(info[0])
+        if check(time, info[3]){
+            ans = (time, info[2])
+        }
+    }
+    
+    return ans.1
+}
 
-        let repeatNum = time / music[3].count + (time % music[3].count == 0 ? 0 : 1)
-        let song = music[3].count > time ? Array(music[3]).map{String($0)}[0..<time].joined() : String(repeating: music[3], count: repeatNum)
-        
-        if song.contains(m) && ans.1 < time {
-            ans = (music[2], time)
-        }
-    }
-    return ans.0
+func replace(_ string: String) -> String {
+    return string
+        .replacingOccurrences(of: "C#", with: "c")
+        .replacingOccurrences(of: "D#", with: "d")
+        .replacingOccurrences(of: "F#", with: "f")
+        .replacingOccurrences(of: "G#", with: "g")
+        .replacingOccurrences(of: "A#", with: "a")
+}
+
+func convertTime(_ value: String) -> Int{
+    let split = value.split(separator: ":")
+    return Int(split[0])! * 60 + Int(split[1])!
 }
