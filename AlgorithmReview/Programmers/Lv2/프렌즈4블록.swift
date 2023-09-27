@@ -7,7 +7,7 @@
 
 import Foundation
 
-func solution(_ m:Int, _ n:Int, _ board:[String]) -> Int {
+func solution1(_ m:Int, _ n:Int, _ board:[String]) -> Int {
 
     var board = board.map{ Array($0) }
     
@@ -83,4 +83,49 @@ func solution(_ m:Int, _ n:Int, _ board:[String]) -> Int {
     }
     
     return ans.count
+}
+
+func solution2(_ m:Int, _ n:Int, _ board:[String]) -> Int {
+    
+    let originalBoard = board.map{ Array($0) }
+    var board = [[Character]](repeating: [], count: n)
+    for i in 0..<n {
+        for j in stride(from : m-1 , to: -1, by: -1) {
+            board[i].append(originalBoard[j][i])
+        }
+    }
+
+    var ans = 0
+    var willRemove = Set<[Int]>()
+    
+    func check(_ row: Int, _ col: Int) {
+        let coord = [(row, col), (row+1, col), (row, col+1), (row+1, col+1)]
+        if !coord.allSatisfy({ board[$0.0].count > $0.1 }) {
+            return
+        }
+        //각 좌표가 유효한 범위인지 & 모두 동일한지 점검
+        let value = board[coord[0].0][coord[0].1]
+        if coord.allSatisfy({ board[$0.0][$0.1] == value }) {
+            coord.forEach {
+              willRemove.insert([$0.0, $0.1])
+            }
+        }
+    }
+    
+    repeat {
+        willRemove = Set<[Int]>()
+        for i in 0..<n-1{
+            for j in 0..<m-1 {
+                check(i, j)
+            }
+        }
+        
+        let remove = willRemove.sorted(by: { $0[0] == $1[0] ? $0[1] > $1[1] : $0[0] < $1[0]})
+        for r in remove {
+            board[r[0]].remove(at: r[1])
+        }
+        ans += remove.count
+    } while willRemove.count > 0
+    
+    return ans
 }
