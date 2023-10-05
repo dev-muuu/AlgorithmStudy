@@ -126,3 +126,86 @@ func reference(_ maps:[String]) -> Int {
     let second = move("L", "E")
     return second == -1 ? -1 : first + second
 }
+
+func solution(_ maps:[String]) -> Int {
+    
+    let maps = maps.map{ Array($0) }
+    
+    var start = (-1,-1), end = (-1, -1), lever = (-1,-1)
+    for i in 0..<maps.count{
+        for j in 0..<maps[0].count {
+            if maps[i][j] == "S" {
+                start = (i, j)
+            }
+            else if maps[i][j] == "E" {
+                end = (i, j)
+            }
+            else if maps[i][j] == "L" {
+                lever = (i, j)
+            }
+        }
+    }
+    
+    var ans = (-1, -1)
+    var visit = [[Bool]](repeating: [Bool](repeating: false, count: maps[0].count), count: maps.count)
+    
+    func canMove(_ row: Int, _ col: Int) -> Bool {
+        row < maps.count && row >= 0 && col < maps[0].count && col >= 0 && maps[row][col] != "X" && !visit[row][col]
+    }
+    
+    var leverQ = [(start.0, start.1, 0)]
+    while !leverQ.isEmpty {
+        let (row, col, count) = leverQ.removeFirst()
+        
+        for coord in [(1,0), (-1,0), (0,1), (0,-1)] {
+            let newRow = row+coord.0
+            let newCol = col+coord.1
+            
+            if newRow == lever.0 && newCol == lever.1 {
+                ans.0 = count+1; break
+            }
+            
+            if canMove(newRow, newCol) {
+                visit[newRow][newCol] = true
+                leverQ.append((newRow, newCol, count+1))
+            }
+        }
+        if ans.0 != -1 {
+            break
+        }
+    }
+    
+    if ans.0 == -1 {
+        return -1
+    }
+    
+    for i in 0..<maps.count{
+        for j in 0..<maps[0].count {
+            visit[i][j] = false
+        }
+    }
+    
+    var endQ = [(lever.0, lever.1, 0)]
+    while !endQ.isEmpty {
+        let (row, col, count) = endQ.removeFirst()
+        
+        for coord in [(1,0), (-1,0), (0,1), (0,-1)] {
+            let newRow = row+coord.0
+            let newCol = col+coord.1
+            
+            if newRow == end.0 && newCol == end.1 {
+                ans.1 = count+1; break
+            }
+            
+            if canMove(newRow, newCol) {
+                visit[newRow][newCol] = true
+                endQ.append((newRow, newCol, count+1))
+            }
+        }
+        if ans.1 != -1 {
+            break
+        }
+    }
+
+    return ans.1 == -1 ? -1 : ans.0 + ans.1
+}
