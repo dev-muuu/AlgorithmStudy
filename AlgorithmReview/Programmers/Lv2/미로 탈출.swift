@@ -7,72 +7,79 @@
 
 import Foundation
 
-//DFS 풀이 > 시간 초과
-func solution(_ maps:[String]) -> Int {
+func timeout(_ maps:[String]) -> Int {
     
     let maps = maps.map{ Array($0) }
-    var leverCount = Int.max
-    var ans = Int.max
+    
+    var start = (-1,-1), end = (-1, -1), lever = (-1,-1)
+    for i in 0..<maps.count{
+        for j in 0..<maps[0].count {
+            if maps[i][j] == "S" {
+                start = (i, j)
+            } else if maps[i][j] == "E" {
+                end = (i, j)
+            } else if maps[i][j] == "L" {
+                lever = (i, j)
+            }
+        }
+    }
+    
+    var ans = (10001, 10001)
     var visit = [[Bool]](repeating: [Bool](repeating: false, count: maps[0].count), count: maps.count)
-    var lever: (Int, Int)!
     
-    func isCoordinateValid(_ x: Int, _ y: Int) -> Bool{
-        x >= 0 && x < maps.count && y >= 0 && y < maps[0].count
-    }
-    
-    func moveForExist(_ x: Int, _ y: Int, _ count: Int){
+    func moveForLever(_ row: Int, _ col: Int, _ count: Int) {
+        if row == lever.0 && col == lever.1 {
+            ans.0 = min(ans.0, count)
+        }
         
-        if maps[x][y] == "E"{
-            ans = min(ans, leverCount + count); return
-        } else if count + leverCount >= ans { return }
-        
-        for coord in [(-1,0), (0,-1), (0,1), (1,0)] {
-            let newX = x+coord.0, newY = y+coord.1
-            if isCoordinateValid(newX, newY) && maps[newX][newY] != "X" && !visit[newX][newY]{
-                visit[newX][newY] = true
-                moveForExist(newX, newY, count + 1)
-                visit[newX][newY] = false
+        for coord in [(1,0), (-1,0), (0,1), (0,-1)] {
+            let newRow = row+coord.0
+            let newCol = col+coord.1
+            if canMove(newRow, newCol) && count+1 < ans.0{
+                visit[newRow][newCol] = true
+                moveForLever(newRow, newCol, count+1)
+                visit[newRow][newCol] = false
             }
         }
     }
     
-    func moveForLever(_ x: Int, _ y: Int, _ count: Int){
-        if maps[x][y] == "L" {
-            lever = (x, y)
-            leverCount = min(leverCount, count)
-            return
-        } else if count >= ans { return }
-        
-        for coord in [(-1,0), (0,-1), (0,1), (1,0)] {
-            let newX = x+coord.0, newY = y+coord.1
-            if isCoordinateValid(newX, newY) && maps[newX][newY] != "X" && !visit[newX][newY]{
-                visit[newX][newY] = true
-                moveForLever(newX, newY, count + 1)
-                visit[newX][newY] = false
+    func moveForEnd(_ row: Int, _ col: Int, _ count: Int) {
+        if row == end.0 && col == end.1 {
+            ans.1 = min(ans.1, count)
+        }
+        for coord in [(1,0), (-1,0), (0,1), (0,-1)] {
+            let newRow = row+coord.0, newCol = col+coord.1
+            if canMove(newRow, newCol) && count+1 < ans.1{
+                visit[newRow][newCol] = true
+                moveForEnd(newRow, newCol, count+1)
+                visit[newRow][newCol] = false
             }
         }
     }
-
-    var start: (Int, Int)!
-    for row in maps.enumerated() {
-        for col in row.element.enumerated() {
-            if col.element == "S" { start = (row.offset, col.offset); break }
-        }
-        if start != nil { break }
+    
+    func canMove(_ row: Int, _ col: Int) -> Bool {
+        row < maps.count && row >= 0 && col < maps[0].count && col >= 0 && maps[row][col] != "X" && !visit[row][col]
     }
     
     visit[start.0][start.1] = true
     moveForLever(start.0, start.1, 0)
-    visit[start.0][start.1] = false
+    if ans.0 == 10001 {
+        return -1
+    }
     
-    if lever == nil { return -1 }
+    for i in 0..<maps.count{
+        for j in 0..<maps[0].count {
+            visit[i][j] = false
+        }
+    }
+    
     visit[lever.0][lever.1] = true
-    moveForExist(lever.0, lever.1, 0)
-    
-    return ans == Int.max ? -1 : ans
+    moveForEnd(lever.0, lever.1, 0)
+
+    return ans.1 == 10001 ? -1 : ans.0 + ans.1
 }
 
-func solution(_ maps:[String]) -> Int {
+func reference(_ maps:[String]) -> Int {
     
     let maps = maps.map{ Array($0) }
     
