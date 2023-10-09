@@ -7,7 +7,7 @@
 
 import Foundation
 
-func solution(_ places:[[String]]) -> [Int] {
+func solution1(_ places:[[String]]) -> [Int] {
     
     func valid(_ room: [[Character]], _ coord: (Int, Int)) -> Bool {
         if coord.0+1 < 5 && room[coord.0+1][coord.1] == "P" { return false }
@@ -42,6 +42,38 @@ func solution(_ places:[[String]]) -> [Int] {
                 coord.1 = 0
             } else {
                 coord.1 += 1
+            }
+        }
+        isValid ? ans.append(1) : ans.append(0)
+    }
+    return ans
+}
+
+func solution2(_ places:[[String]]) -> [Int] {
+    
+    var ans = [Int]()
+    
+    for place in places {
+        
+        var isValid = true
+        let place = place.map{ Array($0) }
+
+        for i in 0..<5 {
+            for j in 0..<5 {
+                
+                if place[i][j] != "P" { continue }
+                
+                if (j+2 < 5 && place[i][j+2] == "P" && place[i][j+1] != "X")
+                || (i+2 < 5 && place[i+2][j] == "P" && place[i+1][j] != "X")
+                || ((i+1 < 5 && j+1 < 5 && place[i+1][j+1] == "P") && (place[i][j+1] != "X" || place[i+1][j] != "X"))
+                || ((i+1 < 5 && j-1 >= 0 && place[i+1][j-1] == "P" ) && (place[i][j-1] != "X" || place[i+1][j] != "X"))
+                || (j+1 < 5 && place[i][j+1] == "P" || i+1 < 5 && place[i+1][j] == "P") {
+                    isValid = false
+                    break
+                }
+            }
+            if !isValid {
+                break
             }
         }
         isValid ? ans.append(1) : ans.append(0)
