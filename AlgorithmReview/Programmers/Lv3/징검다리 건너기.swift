@@ -7,7 +7,7 @@
 
 import Foundation
 
-func solution(_ stones:[Int], _ k:Int) -> Int {
+func reference(_ stones:[Int], _ k:Int) -> Int {
     
     var left = 1, right = 200000000
     
