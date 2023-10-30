@@ -7,26 +7,20 @@
 
 import Foundation
 
-func reference(_ stones:[Int], _ k:Int) -> Int {
-    
-    var left = 1, right = 200000000
-    
-    while left <= right {
-        let mid = (left + right) / 2
-        var cnt = 0
+func solution(_ stones:[Int], _ k:Int) -> Int {
+    var l = 1, r = 200000000
+    while l <= r {
+        let mid = (l+r)/2
+        var p = 0
         for s in stones {
-            if s - mid <= 0 {
-                cnt += 1
-                if cnt == k { break }
-            } else {
-                cnt = 0
-            }
+            p = s <= mid ? p+1 : 0
+            if p == k { break }
         }
-        if cnt >= k {
-            right = mid - 1
+        if p < k {
+            l = mid+1
         } else {
-            left = mid + 1
+            r = mid-1
         }
     }
-    return left
+    return l
 }
