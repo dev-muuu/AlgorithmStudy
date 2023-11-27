@@ -8,24 +8,26 @@
 import Foundation
 
 func solution(_ cacheSize:Int, _ cities:[String]) -> Int {
-
-    var total = 0
+    
+    var ans = 0
     var cache = [String: Int]()
-
-    for city in cities{
-        let cityLowercase = city.lowercased()
-        if cache[cityLowercase] != nil {
-            total += 1
-        }else{
-            total += 5
-            if cacheSize == 0 {
-                continue
-            }else if cache.count >= cacheSize{
-                let removeCity = cache.min(by: { $0.value < $1.value})!
-                cache.removeValue(forKey: removeCity.key)
+    
+    if cacheSize == 0 {
+        return cities.count * 5
+    }
+    
+    for (i, c) in cities.enumerated() {
+        let c = c.lowercased()
+        if cache[c] != nil { //hit
+            ans += 1
+        } else {
+            ans += 5
+            if cache.count == cacheSize {
+                let candidate = cache.min(by: { $0.value < $1.value })
+                cache.removeValue(forKey: candidate!.key)
             }
         }
-        cache[cityLowercase] = total
+        cache[c] = i
     }
-    return total
+    return ans
 }
