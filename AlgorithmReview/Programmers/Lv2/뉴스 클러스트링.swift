@@ -8,48 +8,44 @@
 import Foundation
 
 func solution(_ str1:String, _ str2:String) -> Int {
+    
+    let str1 = makeSet(str1), str2 = makeSet(str2)
 
-    func makeMap(str: String) -> Dictionary<String,Int>{
-
-        let str = Array(str.lowercased())
-        var map = [String: Int]()
-
-        for i in 0..<str.count-1{
-
-            if !(str[i].asciiValue! >= 97 && str[i].asciiValue! <= 122
-            && str[i+1].asciiValue! >= 97 && str[i+1].asciiValue! <= 122){
-                continue
-            }
-
-            let key = "\(str[i])\(str[i+1])"
-
-            if map[key] == nil{
-                map[key] = 0
-            }
-            map[key]! += 1
-        }
-        return map
+    if str1.count == 0 && str2.count == 0 {
+        return 65536
     }
-
-    var map1 = makeMap(str: str1)
-    var map2 = makeMap(str: str2)
 
     var intersection = 0
-    var union = map1.values.reduce(0){ $0 + $1 } + map2.values.reduce(0){ $0 + $1 }
-    for key in map1.keys{
-        if let map1Value = map1[key], let map2Value = map2[key]{
-            let value = min(map1Value, map2Value)
-            intersection += value
-            union -= value
+    var union = 0
+    for i in str1.keys {
+        let value1 = str1[i]!
+        if let value2 = str2[i] {
+            intersection += min(value1, value2)
+            union += max(value1, value2)
+        }
+        else {
+            union += value1
         }
     }
-
-    let ans: Double = union == 0 ? 1 : Double(intersection) / Double(union)
-    return Int(ans * 65536)
+    for i in str2.keys {
+        if str1[i] == nil {
+            union += str2[i]!
+        }
+    }
+    return Int(Float(intersection) / Float(union) * 65536)
 }
 
-private extension Character{
-     var isAlphabet: Bool{
-         self.asciiValue! >= 97 && self.asciiValue! <= 122
-     }
- }
+func makeSet(_ str: String) -> [String: Int] {
+    let str = Array(str.lowercased())
+    var result = [String:Int]()
+    for i in 0..<str.count-1 {
+        if str[i].isLetter && str[i+1].isLetter{
+            let key = "\(str[i])\(str[i+1])"
+            if result[key] == nil {
+                result[key] = 0
+            }
+            result[key]! += 1
+        }
+    }
+    return result
+}
