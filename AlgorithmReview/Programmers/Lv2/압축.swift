@@ -8,57 +8,45 @@
 import Foundation
 
 func solution(_ msg:String) -> [Int] {
-
-    var mapIndex = [String:Int]()
-    for i in 0...25{
-        let ch = Character(UnicodeScalar(65 + i)!)
-        mapIndex[String(ch)] = i + 1
+    
+    var dict = [String:Int]()
+    for i in 0..<26 {
+        dict[String(UnicodeScalar(65+i)!)] = i+1
     }
-
-    let msg = Array(msg).map{ String($0) }
+    
     var ans = [Int]()
+    let msg = Array(msg).map{ String($0) }
+    
     var index = 0
     while index < msg.count {
-        var i = index + 1
-        while i < msg.count {
-            let check = msg[index...i].joined()
-            if mapIndex[check] == nil { break }
-            i += 1
+        
+        //현재 입력 문자열 찾기
+        
+        var w = (index, msg[index])
+        
+        while isSafeRange() && dict[nextKey()] != nil {
+            w.0 += 1
+            w.1 += msg[w.0]
         }
-
-        let w = msg[index..<i].joined()
-        ans.append(mapIndex[w]!)
-
-        if i != msg.count {
-            let c = msg[i]
-            mapIndex[w + c] = mapIndex.count + 1
+        
+        ans.append(dict[w.1]!)
+        
+        //다음 글자 사전에 추가
+        
+        if isSafeRange() {
+            dict[nextKey()] = dict.count + 1
         }
-        index = i
+        
+        index = w.0 + 1
+        
+        func isSafeRange() -> Bool {
+            w.0 + 1 < msg.count
+        }
+        
+        func nextKey() -> String {
+            w.1 + msg[w.0+1]
+        }
     }
-
+    
     return ans
-}
-
-func reference(_ msg:String) -> [Int] {
-    var dic = [String:Int]()
-    for i in (1...26) {
-        dic[String(UnicodeScalar(i + 64)!)] = i
-    }
-
-    var key = ""
-    var iter = msg.makeIterator()
-    var encoded = [Int]()
-    while let c = iter.next() {
-        let newKey = key + String(c)
-        if dic[newKey] != nil {
-            key.append(c)
-        } else {
-            dic[newKey] = dic.count + 1
-            encoded.append(dic[key]!)
-            key = String(c)
-        }
-    }
-    encoded.append(dic[key]!)
-
-    return encoded
 }
