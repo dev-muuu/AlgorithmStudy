@@ -9,48 +9,47 @@ import Foundation
 
 func solution(_ fees:[Int], _ records:[String]) -> [Int] {
     
-    var carMap = [String: String]() //차량번호 : 시간
-    var parkingSum = [String: Int]() //차량번호 : 누적 시간
+    let records: [(time: Int, id: String)] = records.map {
     
-    func getTimeOfMinute(time: String) -> Int {
-        let time = time.split(separator: ":").map{ Int($0)! }
-        return time[0] * 60 + time[1]
+        let split = $0.split(separator: " ")
+        let splitTime = split[0].split(separator: ":").map{ Int($0)! }
+
+        return (splitTime[0]*60 + splitTime[1], String(split[1]))
     }
     
-    for record in records{
-        
-        let info = record.split(separator: " ").map{ String($0) }
-
-        if info[2] == "IN" { //IN
-            carMap[info[1]] = info[0]
-        } else { //OUT
-            //입차 시간 가져오기
-            let parkIn = getTimeOfMinute(time: carMap[info[1]]!)
-            let parkOut = getTimeOfMinute(time: info[0])
-            let time = parkOut - parkIn
-
-            parkingSum[info[1]] = parkingSum[info[1]] == nil ? time : parkingSum[info[1]]! + time
-            
-            carMap.removeValue(forKey: info[1])
+    var inoutDict = [String:Int]()
+    var total = [String: Int]()
+    
+    //누적 사용시간 계산
+    for r in records {
+        if inoutDict[r.id] == nil {
+            inoutDict[r.id] = r.time
+        }
+        else {
+            if total[r.id] == nil {
+                total[r.id] = 0
+            }
+            total[r.id]! += r.time - inoutDict[r.id]!
+            inoutDict.removeValue(forKey: r.id)
         }
     }
     
-    //안빠진 차 점검
-    for (carId, parkIn) in carMap{
-        let parkIn = getTimeOfMinute(time: parkIn)
-        let parkOut = getTimeOfMinute(time: "23:59")
-        let time = parkOut - parkIn
-        parkingSum[carId] = parkingSum[carId] == nil ? time : parkingSum[carId]! + time
-    }
-    
-    var ans = [Int]()
-    for info in parkingSum.sorted(by: { $0.key < $1.key }){
-        if info.value <= fees[0] {
-            ans.append(fees[1])
-        } else {
-            let cost = fees[1] + Int(ceil((Float(info.value) - Float(fees[0])) / Float(fees[2]))) * fees[3]
-            ans.append(cost)
+    //출차하지 않은 차량 누적 시간 계산
+    for i in inoutDict {
+        let end = 23*60 + 59
+        if total[i.key] == nil {
+            total[i.key] = 0
         }
+        total[i.key]! += end-i.value
     }
-    return ans
+
+    //id 오름차순으로 요금 계산
+    return total.sorted(by: { $0.key < $1.key }).map {
+        var cost: Int = fees[1]
+        if $0.value > fees[0] {
+            let unit = Int(ceil(Float($0.value-fees[0]) / Float(fees[2])))
+            cost += unit * fees[3]
+        }
+        return cost
+    }
 }
