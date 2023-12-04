@@ -8,37 +8,28 @@
 import Foundation
 
 func solution(_ files:[String]) -> [String] {
-    
-    var split = [String: (String, Int)]() //head, num
-    
-    for f in files{
-        let file = Array(f)
-        var head = "", num = 0
-        
-        var index = 0, start = 0
-        while index < file.count{
-            if !file[index].isNumber {
-                index += 1
-            } else {
-                break
-            }
-        }
-        head = file[start..<index].map{ String($0) }.joined().lowercased()
-        
-        start = index
-        while index < file.count{
-            if file[index].isNumber {
-                index += 1
-            } else {
-                break
-            }
-        }
-        num = Int(file[start..<index].map{ String($0) }.joined())!
-        
-        split[f] = (head, num)
-    }
 
-    return files.sorted(by: {
-        split[$0]!.0 == split[$1]!.0 ? split[$0]!.1 < split[$1]!.1 : split[$0]!.0 < split[$1]!.0
-    })
+    var file = [(id: Int, head: String, number: Int)]()
+    for (i, value) in files.enumerated() {
+        
+        //head
+        let fileArray = Array(value).map{ String($0).lowercased() }
+        let headEnd = fileArray.firstIndex(where: { Character($0).isNumber })!
+        let head = fileArray[0..<headEnd].joined()
+        
+        //number
+        var numberEnd: Int! = fileArray[headEnd...].firstIndex(where: { !Character($0).isNumber })
+        if numberEnd == nil {
+            numberEnd = fileArray.count
+        }
+        let number = Int(fileArray[headEnd..<numberEnd].joined())!
+        
+        file.append((i, head, number))
+    }
+    
+    let sortFile = file
+    .sorted(by: { $0.number < $1.number })
+    .sorted(by: { $0.head < $1.head })
+    
+    return sortFile.map{ files[$0.id] }
 }
