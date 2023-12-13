@@ -9,43 +9,37 @@ import Foundation
 
 func solution(_ m:String, _ musicinfos:[String]) -> String {
     
-    let m = replace(m)
+    let m = convert(m)
     
-    func check(_ time: Int, _ music: String) -> Bool {
-        
-        var music = replace(music)
-        music = String(repeating: music, count: time/music.count+1)
-        music = String(music.prefix(time))
-        
-        if music.contains(m) && ans.0 < time {
-            return true
-        }
-        return false
-    }
+    var result = ("(None)", 0) //곡 제목, 재생 시간
     
-    var ans = (0, "(None)")
-    
-    for m in musicinfos{
-        let info = m.split(separator: ",").map{ String($0) }
-        let time = convertTime(info[1]) - convertTime(info[0])
-        if check(time, info[3]){
-            ans = (time, info[2])
+    for info in musicinfos {
+        let data = info.split(separator: ",").map{ String($0) }
+        let playtime = time(data[1]) - time(data[0])
+        if isContain(convert(data[3]), playtime) && result.1 < playtime {
+            result = (data[2], playtime)
         }
     }
     
-    return ans.1
-}
-
-func replace(_ string: String) -> String {
-    return string
+    return result.0
+    
+    func convert(_ string: String) -> String {
+        return string
         .replacingOccurrences(of: "C#", with: "c")
         .replacingOccurrences(of: "D#", with: "d")
         .replacingOccurrences(of: "F#", with: "f")
         .replacingOccurrences(of: "G#", with: "g")
         .replacingOccurrences(of: "A#", with: "a")
-}
-
-func convertTime(_ value: String) -> Int{
-    let split = value.split(separator: ":")
-    return Int(split[0])! * 60 + Int(split[1])!
+    }
+    
+    func time(_ t: String) -> Int {
+        let split = t.split(separator: ":").map{ Int($0)! }
+        return split[0]*60 + split[1]
+    }
+    
+    func isContain(_ base: String, _ playtime: Int) -> Bool {
+        var play = String(repeating: base, count: playtime/base.count+1)
+        play = String(play.prefix(playtime))
+        return play.contains(m)
+    }
 }
