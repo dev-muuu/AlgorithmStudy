@@ -8,18 +8,21 @@
 import Foundation
 
 func solution(_ n:Int, _ k:Int) -> Int {
+    
     let radix = String(n, radix: k).split(separator: "0").map{ Int($0)! }
-    var ans = 0
-    for i in radix{
-        var isDecimal = true
-        for j in stride(from: 2, to: Int(sqrt(Double(i))) + 1,by: +1){
-            if i % j == 0 {
-                isDecimal = false; break
+
+    func isPrime(_ value: Int) -> Bool {
+        
+        if value == 1 { return false }
+        
+        for i in stride(from: 2, to: Int(sqrt(Double(value))) + 1, by: +1) {
+            if value % i == 0 {
+                return false
             }
         }
-        if i != 1 && isDecimal {
-            ans += 1
-        }
+        
+        return true
     }
-    return ans
+    
+    return radix.filter{ isPrime($0) }.count
 }
