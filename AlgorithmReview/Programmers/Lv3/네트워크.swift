@@ -8,55 +8,26 @@
 import Foundation
 
 func solution(_ n:Int, _ computers:[[Int]]) -> Int {
+
+    var visit = [Bool](repeating: false, count: n)
     
-    func bfs(node: Int){
-        var queue = [node]
-        while !queue.isEmpty {
-            let pop = queue.removeFirst()
-            if visit[pop] {
-                continue
-            }
-            visit[pop] = true
-            for j in stride(from: 0, to: n, by: +1){ //절반만 고려하게 될 경우 논리 오류
-                if computers[pop][j] == 1{
-                    queue.append(j)
-                }
+    func network(_ k: Int) {
+        for i in 0..<n{
+            if computers[k][i] == 1 && !visit[i] {
+                visit[i] = true
+                network(i)
             }
         }
     }
     
-    var visit = [Bool](repeating: false, count: n)
-    var network = 0
+    var result = 0
     for i in 0..<n{
         if !visit[i] {
-            network += 1
-            bfs(node: i)
+            visit[i] = true
+            result += 1
+            network(i)
         }
     }
     
-    return network
-}
-
-func reference(_ n:Int, _ computers:[[Int]]) -> Int {
-    
-    var visit: [Bool] = Array(repeating: false, count: n)
-    var answer: Int = 0
-
-    func dfs(_ vertax: Int) {
-        visit[vertax] = true
-        for i in 0..<n {
-            if computers[vertax][i] == 1 && visit[i] == false {
-                dfs(i)
-            }
-        }
-    }
-
-    for i in 0..<n {
-        if !visit[i] {
-            answer += 1
-            dfs(i)
-        }
-    }
-
-    return answer
+    return result
 }
