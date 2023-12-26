@@ -7,7 +7,7 @@
 
 import Foundation
 
-func solution(_ msg:String) -> [Int] {
+func solution1(_ msg:String) -> [Int] {
     
     var dict = [String:Int]()
     for i in 0..<26 {
@@ -49,4 +49,36 @@ func solution(_ msg:String) -> [Int] {
     }
     
     return ans
+}
+
+func solution2(_ msg:String) -> [Int] {
+    
+    var map = [String: Int]()
+    for i in 1...26 {
+        map[String(UnicodeScalar(64+i)!)] = i
+    }
+    
+    let msg = Array(msg).map{ String($0) }
+    
+    var result = [Int]()
+    var index = 0
+    while index < msg.count {
+        // 현재 입력
+        var w = ""
+        var endIndex = index
+        while endIndex < msg.count && map[msg[index..<endIndex+1].joined()] != nil {
+            w = msg[index..<endIndex+1].joined()
+            endIndex += 1
+        }
+        // 사전 추가
+        if endIndex < msg.count {
+            map[msg[index..<endIndex+1].joined()] = map.count + 1
+        }
+        // 출력
+        result.append(map[w]!)
+        
+        index = endIndex
+    }
+    
+    return result
 }
