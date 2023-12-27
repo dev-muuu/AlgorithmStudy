@@ -9,20 +9,18 @@ import Foundation
 
 func solution(_ n:Int, _ t:Int, _ m:Int, _ p:Int) -> String {
 
-    func getRadix(){
-        let radix: [String] = String(num, radix: n).map{ $0.uppercased() }
-        map.append(contentsOf: radix)
-        num += 1
+    var input = [Character]()
+    var number = 0
+    while input.count < t*m+1 {
+        let numStr = Array(String(number, radix: n).uppercased())
+        input.append(contentsOf: numStr)
+        number += 1
     }
     
-    var map: [String] = [" "]
-    var num = 0
-    var ans = ""
-    for i in 0..<t{
-        while m*i+p >= map.count {
-            getRadix()
-        }
-        ans.write("\(map[m*i+p])")
+    var result = ""
+    for i in stride(from: p-1, to: m*t, by: +m) {
+        result.append(input[i])
     }
-    return ans
+    
+    return result
 }
