@@ -8,21 +8,31 @@
 import Foundation
 
 func solution(_ word:String) -> Int {
+
+    let w = ["A","E","I","O","U"]
     
-    let vowel: [String] = ["A", "E", "I", "O", "U"]
-    var num = 0, ans = 0
-    func dfs(string: String){
-        if string == word {
-            ans = num; return
-        } else if string.count == 5 {
+    var count = -1
+    var ans = 0
+    func dfs(_ str: String) {
+        
+        count += 1
+        
+        if str == word {
+            ans = count
+            return
+        }
+        if str.count == 5 {
             return
         }
         
-        for c in vowel{
-            num += 1
-            dfs(string: string + c)
+        for i in w {
+            dfs(str + i)
         }
+        
     }
-    dfs(string: "")
+    
+    dfs("")
+    
     return ans
+    
 }
