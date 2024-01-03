@@ -8,20 +8,24 @@
 import Foundation
 
 func solution(_ numbers:[Int]) -> [Int] {
-    var ans = [Int](repeating: -1, count: numbers.count)
-    var index = numbers.count - 1
+    
+    var ans = [-1]
     var stack = [numbers.last!]
-    while index >= 0 {
-        while !stack.isEmpty {
-            let last = stack.last!
-            if last > numbers[index] {
-                ans[index] = last; break
-            } else {
-                stack.removeLast()
-            }
+    for i in stride(from: numbers.count-2, to: -1, by: -1) {
+        
+        while !stack.isEmpty && stack.last! <= numbers[i] {
+            stack.removeLast()
         }
-        stack.append(numbers[index])
-        index -= 1
+        
+        if stack.isEmpty {
+            ans.append(-1)
+        }
+        else {
+            ans.append(stack.last!)
+        }
+        
+        stack.append(numbers[i])
     }
-    return ans
+    
+    return ans.reversed()
 }
