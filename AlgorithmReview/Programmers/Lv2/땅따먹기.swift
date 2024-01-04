@@ -7,7 +7,7 @@
 
 import Foundation
 
-func solution(_ land:[[Int]]) -> Int{
+func solution1(_ land:[[Int]]) -> Int{
     var dp = land[0]
     for i in stride(from: 1, to: land.count, by: +1){
         var temp = [Int]()
@@ -20,6 +20,19 @@ func solution(_ land:[[Int]]) -> Int{
             temp.append(land[i][j] + maxValue)
         }
         dp = temp
+    }
+    return dp.max()!
+}
+
+func solution2(_ land:[[Int]]) -> Int{
+    var dp = land[0]
+    for i in 1..<land.count {
+        let candidate = dp.sorted(by: { $0 > $1 })
+        let candidateIndex = dp.firstIndex(of: candidate.first!)!
+        for j in 0..<4 {
+            let preMax = candidateIndex == j ? candidate[1] : candidate[0]
+            dp[j] = land[i][j] + preMax
+        }
     }
     return dp.max()!
 }
