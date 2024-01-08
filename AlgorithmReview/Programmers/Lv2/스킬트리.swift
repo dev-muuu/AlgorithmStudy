@@ -8,37 +8,34 @@
 import Foundation
 
 func solution(_ skill:String, _ skill_trees:[String]) -> Int {
+
+    let skill = Array(skill)
+    let skillElement = Set<Character>(skill)
+    var answer = 0
     
-    var count = 0
-    for curri in skill_trees{
+    for target in skill_trees {
         
-        let filter = Array(curri.filter{ skill.contains($0) })
-        let skill = Array(skill)
+        let target = Array(target)
         
-        var validation = true
-        var skillIndex = 0, filterIndex = 0
+        var sPoint = 0, tPoint = 0
+        var isValid = true
         
-        while skillIndex < skill.count && filterIndex < filter.count {
-            if skill[skillIndex] == filter[filterIndex] {
-                skillIndex += 1
-                filterIndex += 1
-            } else {
-                validation = false; break
+        while sPoint < skill.count && tPoint < target.count {
+            if skill[sPoint] == target[tPoint] {
+                sPoint += 1
+                tPoint += 1
+            }
+            else if skillElement.contains(target[tPoint]) {
+                isValid = false
+                break
+            }
+            else {
+                tPoint += 1
             }
         }
-        if validation{
-            count += 1
-        }
+        
+        if isValid { answer += 1 }
     }
-    return count
-}
-
-func reference(_ skill:String, _ skill_trees:[String]) -> Int {
-
-    func available(_ s: String, _ t: String) -> Bool {
-        let alza = t.filter { s.contains($0) }
-        return s.starts(with: alza)
-    }
-
-    return skill_trees.map { available(skill, $0) }.filter { $0 }.count
+    
+    return answer
 }
