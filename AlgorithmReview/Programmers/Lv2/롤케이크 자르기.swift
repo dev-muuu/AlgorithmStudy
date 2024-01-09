@@ -7,48 +7,37 @@
 
 import Foundation
 
-func solution1(_ topping:[Int]) -> Int {
-
-    var toppingCount = [Int](repeating: 0, count: 10001)
-    for i in topping{
-        toppingCount[i] += 1
+func solution(_ topping:[Int]) -> Int {
+    
+    var toppingA = [Int:Int]()
+    var toppingB = [Int:Int]()
+    
+    for i in topping {
+        if toppingB[i] == nil {
+            toppingB[i] = 0
+        }
+        toppingB[i]! += 1
     }
     
-    var bigSet = Set<Int>(), smallSet = Set<Int>(topping)
-    var ans = 0
-    for i in topping{
-        bigSet.insert(i)
-        toppingCount[i] -= 1
-        if toppingCount[i] == 0 {
-            smallSet.remove(i)
+    var answer = 0
+    for i in topping {
+        
+        if toppingA[i] == nil {
+            toppingA[i] = 0
         }
-        if bigSet.count == smallSet.count {
-            ans += 1
+        toppingA[i]! += 1
+        
+        if toppingB[i] == 1 {
+            toppingB.removeValue(forKey: i)
         }
-    }
-    return ans
-}
-
-func solution2(_ topping:[Int]) -> Int {
-
-    var toppingCount = [Int](repeating: 0, count: 10001)
-    var smallSet = Set<Int>()
-    for i in topping{
-        toppingCount[i] += 1
-        smallSet.insert(i)
+        else {
+            toppingB[i]! -= 1
+        }
+        
+        if toppingA.count == toppingB.count {
+            answer += 1
+        }
     }
     
-    var bigSet = Set<Int>()
-    var ans = 0
-    for i in topping{
-        bigSet.insert(i)
-        toppingCount[i] -= 1
-        if toppingCount[i] == 0 {
-            smallSet.remove(i)
-        }
-        if bigSet.count == smallSet.count {
-            ans += 1
-        }
-    }
-    return ans
+    return answer
 }
