@@ -8,26 +8,23 @@
 import Foundation
 
 func solution(_ order:[Int]) -> Int {
-
-    var temp = [Int]()
-    var orderIndex = 0
-    for i in 1...order.count{
-
-        var validation = false
-        if i == order[orderIndex] {
-            validation = true
-            orderIndex += 1
-        }
-
-        while orderIndex < order.count && !temp.isEmpty && temp.last! == order[orderIndex] {
-            temp.removeLast()
-            orderIndex += 1
-        }
-
-        if !validation{
-            temp.append(i)
+    
+    let n = order.max()!
+    
+    var p = 0
+    var container = [Int]()
+    var answer = 0
+    
+    for i in 1...n {
+        
+        container.append(i)
+        
+        while p < order.count && container.last == order[p] {
+            answer += 1
+            container.removeLast()
+            p += 1
         }
     }
-
-    return orderIndex
+    
+    return answer
 }
