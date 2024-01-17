@@ -7,7 +7,7 @@
 
 import Foundation
 
-func solution(_ a:[Int], _ b:[Int]) -> Int {
+func reference(_ a:[Int], _ b:[Int]) -> Int {
     
     var answer: Int = 0
     var aTeam: [Int] = a.sorted(by: >)
@@ -20,5 +20,27 @@ func solution(_ a:[Int], _ b:[Int]) -> Int {
             answer += 1
         }
     }
+    return answer
+}
+
+func solution(_ a:[Int], _ b:[Int]) -> Int {
+
+    let a = a.sorted(by: >)
+    let b = b.sorted(by: >)
+    
+    var ap = 0, bp = 0
+    var answer = 0
+    
+    while ap < a.count && bp < b.count {
+        if a[ap] < b[bp] {
+            answer += 1
+            bp += 1
+            ap += 1
+        }
+        else {
+            ap += 1
+        }
+    }
+    
     return answer
 }
