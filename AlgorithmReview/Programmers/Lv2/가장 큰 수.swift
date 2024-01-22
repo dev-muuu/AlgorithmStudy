@@ -8,20 +8,11 @@
 import Foundation
 
 func solution1(_ numbers:[Int]) -> String {
-    
-    var string = numbers.map{ String($0) }
-    
-    let ans = string.sorted(by: {
-        let a = Array($0), b = Array($1)
-        for i in 0..<min(a.count, b.count){
-            if a[i] == b[i] {
-                continue
-            }
-            return a[i] > b[i]
-        }
-        return $0 + $1 > $1 + $0
-    })
-    return ans.allSatisfy{ $0 == "0" } ? "0" : ans.joined()
+    if numbers.allSatisfy({$0 == 0}) {
+        return "0"
+    }
+    let sorted = numbers.map { String($0) }.sorted(by: { $0 + $1 > $1 + $0 })
+    return sorted.reduce(""){ $0 + $1 }
 }
 
 func solution2(_ numbers:[Int]) -> String {
