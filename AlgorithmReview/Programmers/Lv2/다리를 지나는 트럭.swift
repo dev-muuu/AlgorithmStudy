@@ -9,21 +9,29 @@ import Foundation
 
 func solution(_ bridge_length:Int, _ weight:Int, _ truck_weights:[Int]) -> Int {
 
-    var time = 1, index = 1, totalWeight = truck_weights[0]
-    var queue = [(1, totalWeight)] //들어간 시간, 무게
+    var cross = [(Int, Int)]() //(인덱스, 다리에 올라온 시간)
+    var next = 0 //다음에 올라올 트럭 포인터
+    var weightSum = 0 //다리에 올라와 있는 트럭들 무게 총합
+    var time = 0
     
-    while !queue.isEmpty{
+    repeat {
+        
         time += 1
-        if !queue.isEmpty && time == queue.first!.0 + bridge_length{
-            let pop = queue.removeFirst()
-            totalWeight -= pop.1
+        
+        //지난 트럭 제거
+        if !cross.isEmpty && cross.first!.1 + bridge_length == time {
+            let pass = cross.removeFirst()
+            weightSum -= truck_weights[pass.0]
         }
-        if index < truck_weights.count && queue.count < bridge_length && totalWeight + truck_weights[index] <= weight{
-            queue.append((time, truck_weights[index]))
-            totalWeight += truck_weights[index]
-            index += 1
+        
+        //새로운 트럭 추가
+        if next < truck_weights.count && weightSum + truck_weights[next] <= weight {
+            weightSum += truck_weights[next]
+            cross.append((next, time))
+            next += 1
         }
-    }
+        
+    } while !cross.isEmpty
     
     return time
 }
