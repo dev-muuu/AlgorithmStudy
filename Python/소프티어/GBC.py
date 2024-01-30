@@ -20,3 +20,4 @@ for _ in range(m):
     p += d
 
 print(answer)
+
