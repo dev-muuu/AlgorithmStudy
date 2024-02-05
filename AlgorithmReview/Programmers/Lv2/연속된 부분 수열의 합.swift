@@ -9,32 +9,34 @@ import Foundation
 
 func solution(_ sequence:[Int], _ k:Int) -> [Int] {
     
-    var left = 0, right = 0
-    var sum = sequence[left]
-    var ans = [left, sequence.count-1]
-    
-    while left < sequence.count{
+    var start = 0, end = 0
+    var sum = sequence.first!
+    var answer = [0, sequence.count]
+    while start < sequence.count {
         if sum == k {
-            if ans[1] - ans [0] > right - left {
-                ans = [left, right]
+            if end-start < answer[1]-answer[0] {
+                answer = [start, end]
             }
-            if right+1 < sequence.count {
-                right += 1
-                sum += sequence[right]
+            if end + 1 < sequence.count {
+                end += 1
+                sum += sequence[end]
             } else {
                 break
             }
-        } else if sum < k {
-            if right+1 < sequence.count {
-                right += 1
-                sum += sequence[right]
+        }
+        else if sum < k {
+            if end + 1 < sequence.count {
+                end += 1
+                sum += sequence[end]
             } else {
                 break
             }
-        } else { //sum > k
-            sum -= sequence[left]
-            left += 1
+        }
+        else {
+            sum -= sequence[start]
+            start += 1
         }
     }
-    return ans
+    
+    return answer
 }
