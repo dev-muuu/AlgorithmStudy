@@ -8,16 +8,20 @@
 import Foundation
 
 func solution(_ number:String, _ k:Int) -> String {
+
+    var result = [String]()
     let number = Array(number).map{ String($0) }
-    var ans = [String]()
-    for (i,c) in number.enumerated() {
-        while !ans.isEmpty && ans.last! < c && ans.count + number.count-i > number.count-k{
-            ans.removeLast()
+
+    for i in 0..<number.count {
+        while !result.isEmpty && result.count+number.count-i > number.count-k && Int(result.last!)! < Int(number[i])! {
+            result.removeLast()
         }
-        ans.append(c)
+        result.append(number[i])
     }
-    if ans.count > number.count-k {
-        ans.removeLast()
+    
+    if result.count > number.count-k {
+        result.removeLast()
     }
-    return ans.joined()
+    
+    return result.joined()
 }
