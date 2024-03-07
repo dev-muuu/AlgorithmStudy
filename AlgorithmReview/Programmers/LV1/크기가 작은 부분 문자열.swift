@@ -8,16 +8,15 @@
 import Foundation
 
 func solution(_ t:String, _ p:String) -> Int {
-    let tArray = Array(t)
-    var count = 0
-    for i in 0..<t.count{
-        if(i + p.count - 1 >= t.count){
-            break
-        }
-        let value = tArray[i...i+p.count-1].map{String($0)}.joined()
-        if(Int(value)! <= Int(p)!){
-            count += 1
+    
+    var answer = 0
+    let t = Array(t).map{ String($0) }
+    
+    for i in 0..<t.count-p.count+1 {
+        if t[i..<i+p.count].joined() <= p {
+            answer += 1
         }
     }
-    return count
+    
+    return answer
 }
