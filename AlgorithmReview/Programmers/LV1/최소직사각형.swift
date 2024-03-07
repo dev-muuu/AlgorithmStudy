@@ -16,3 +16,13 @@ func solution(_ sizes:[[Int]]) -> Int {
     }
     return answer.0 * answer.1
 }
+
+
+func solution2(_ sizes:[[Int]]) -> Int {
+    var answer = (0, 0)
+    for size in sizes {
+        let size = size.sorted(by: >)
+        answer = ((max(size[0], answer.0)), max(size[1], answer.1))
+    }
+    return answer.0 * answer.1
+}
