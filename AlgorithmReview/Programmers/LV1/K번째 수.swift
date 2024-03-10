@@ -8,25 +8,10 @@
 
 import Foundation
 
-func solution1(_ array:[Int], _ commands:[[Int]]) -> [Int] {
-
-    var result = [Int]()
-    for i in commands{
-        let start = i[0] - 1
-        let end = i[1] - 1
-        let index = i[2] - 1
-        let sliceAndSort = array[start...end].sorted{ $0 < $1 }
-        result.append(sliceAndSort[index])
+func solution(_ array:[Int], _ commands:[[Int]]) -> [Int] {
+    var answer = [Int]()
+    for c in commands {
+        answer.append(array[c[0]-1..<c[1]].sorted(by: <)[c[2]-1])
     }
-    return result
-}
-
-func solution2(_ array:[Int], _ commands:[[Int]]) -> [Int] {
-    return commands.map{
-        let start = $0[0] - 1
-        let end = $0[1] - 1
-        let index = $0[2] - 1
-        let sliceAndSort = array[start...end].sorted{ $0 < $1 }
-        return sliceAndSort[index]
-    }
+    return answer
 }
