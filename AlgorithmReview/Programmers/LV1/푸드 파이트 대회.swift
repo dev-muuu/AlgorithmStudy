@@ -7,19 +7,10 @@
 
 import Foundation
 
-func solution1(_ food:[Int]) -> String {
-    var l = ""
-    var r = ""
-    (1..<food.count).map{
-        l = l + String.init(repeating: String($0), count: food[$0] / 2)
-        r = String.init(repeating: String($0), count: food[$0] / 2) + r
+func solution(_ food:[Int]) -> String {
+    var answer = ""
+    for i in 1..<food.count {
+        answer += String(repeating: "\(i)", count: food[i]/2)
     }
-    return l + "0" + r
-}
-
-func solution2(_ food:[Int]) -> String {
-    let l = (1..<food.count).reduce("", {
-        return $0 + String(repeating: String($1), count: food[$1] / 2)
-    })
-    return l + "0" + l.reversed()
+    return answer + "0" + answer.reversed()
 }
