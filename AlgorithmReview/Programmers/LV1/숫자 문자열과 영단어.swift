@@ -8,36 +8,34 @@
 import Foundation
 
 func solution(_ s:String) -> Int {
-
-    //mapping array 먼저 생성
-    var mapping = [String: Int]()
-    mapping["zero"] = 0
-    mapping["one"] = 1
-    mapping["two"] = 2
-    mapping["three"] = 3
-    mapping["four"] = 4
-    mapping["five"] = 5
-    mapping["six"] = 6
-    mapping["seven"] = 7
-    mapping["eight"] = 8
-    mapping["nine"] = 9
-
-    var temp = ""
-    let result = s.map{
-        if($0.isNumber){
-            return String($0)
+    
+    let map = ["zero":0, "one":1, "two":2, "three":3, "four":4, "five":5, "six":6, "seven":7, "eight":8, "nine":9]
+    let s = Array(s)
+    
+    var answer = ""
+    var index = 0
+    
+    while index < s.count {
+        
+        if s[index].isNumber {
+            answer += (String(s[index]))
+            index += 1
+            continue
         }
-
-        temp.write(String($0))
-        if(mapping[temp] == nil){
-            return ""
-        }else{
-            let value = mapping[temp]!
-            temp = ""
-            return String(value)
+        
+        var temp = String(s[index])
+        index += 1
+        while index < s.count && !s[index].isNumber{
+            temp += String(s[index])
+            index += 1
+            if map[temp] != nil {
+                break
+            }
         }
-    }.joined()
-    return Int(result)!
+        answer.write(String(map[temp]!))
+    }
+    
+    return Int(answer)!
 }
 
 func reference(_ s:String) -> Int {
