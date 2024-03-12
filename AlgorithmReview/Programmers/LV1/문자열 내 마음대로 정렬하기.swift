@@ -9,13 +9,9 @@
 import Foundation
 
 func solution(_ strings:[String], _ n:Int) -> [String] {
-    return strings.sorted{
-        let a = $0.map({ String($0) })
-        let b = $1.map({ String($0) })
+    return strings.sorted(by: {
+        let a = Array($0)
+        let b = Array($1)
         return a[n] == b[n] ? $0 < $1 : a[n] < b[n]
-    }
-}
-
-func reference(_ strings:[String], _ n:Int) -> [String] {
-    return strings.sorted{  Array($0)[n] == Array($1)[n] ? $0 < $1 :  Array($0)[n] < Array($1)[n] }
+    })
 }
