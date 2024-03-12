@@ -9,36 +9,38 @@ import Foundation
 
 func solution(_ n:Int, _ wires:[[Int]]) -> Int {
 
-    var mapping = [[Int]](repeating: [], count: n+1)
-    for i in wires{
-        mapping[i[0]].append(i[1])
-        mapping[i[1]].append(i[0])
+    var nodes = [[Int]](repeating: [], count: n+1)
+    for i in wires {
+        nodes[i[0]].append(i[1])
+        nodes[i[1]].append(i[0])
     }
     
-    func counting(_ node: Int, _ except: Int) -> Int{
+    func bfs(_ num: Int, _ except: Int) -> Int{
+        
+        var count = 0
+        var queue = [num]
         var visit = [Bool](repeating: false, count: n+1)
-        visit[node] = true
+        visit[num] = true
         visit[except] = true
         
-        var count = 1
-        var queue = [node]
-        while !queue.isEmpty{
+        while !queue.isEmpty {
             let pop = queue.removeFirst()
-            for i in mapping[pop]{
-                if !visit[i]{
+            for i in nodes[pop] {
+                if !visit[i]  {
                     visit[i] = true
-                    count += 1
                     queue.append(i)
+                    count += 1
                 }
             }
         }
+        
         return count
     }
     
-    var ans = Int.max
-    for i in wires{
-        ans = min((abs(counting(i[0], i[1]) - counting(i[1], i[0]))), ans)
+    var answer = Int.max
+    for w in wires {
+        answer = min(answer, abs(bfs(w[0], w[1])-bfs(w[1], w[0])))
     }
     
-    return ans
+    return answer
 }
