@@ -17,3 +17,15 @@ func solution(_ a:Int, _ b:Int, _ n:Int) -> Int {
     }
     return count
 }
+
+func solution(_ a:Int, _ b:Int, _ n:Int) -> Int {
+    var answer = 0
+    var coke = n
+    while coke >= a {
+        let remain = coke%a
+        let newCoke = (coke - remain) / a * b
+        answer += newCoke
+        coke = newCoke + remain
+    }
+    return answer
+}
