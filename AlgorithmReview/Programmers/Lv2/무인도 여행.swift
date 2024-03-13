@@ -8,31 +8,41 @@
 import Foundation
 
 func solution(_ maps:[String]) -> [Int] {
+    
+    let maps = maps.map{ Array($0) }
+    let size = (maps.count, maps[0].count)
 
-    var maps = maps.map{ Array($0) }
-    let col = maps.count, row = maps[0].count
-    var visit = [[Bool]](repeating: [Bool](repeating: false, count: row), count: col)
-
-    func findFood(_ i: Int, _ j: Int) -> Int{
-        var food = Int(String(maps[i][j]))!
-        for direction in [(-1,0),(1,0),(0,1),(0,-1)]{
-            let x = i + direction.0, y = j + direction.1
-            if x < col && x >= 0 && y >= 0 && y < row && maps[x][y] != "X" && !visit[x][y]{
-                visit[x][y] = true
-                food += findFood(x, y)
-            }
+    var answer = [Int]()
+    var visit = [[Bool]](repeating: [Bool](repeating: false, count: size.1), count: size.0)
+    var sum = 0
+    
+    func move(_ row: Int, _ col:Int) {
+        
+        func isValid(_ i: Int, _ j: Int) -> Bool {
+            i >= 0 && i < size.0 && j >= 0 && j < size.1
         }
-        return food
-    }
-
-    var ans = [Int]()
-    for i in 0..<col{
-        for j in 0..<row{
-            if maps[i][j] != "X" && !visit[i][j]{
+        
+        sum += Int(String(maps[row][col]))!
+        
+        for c in [(1,0), (0,1), (-1, 0), (0,-1)] {
+            let (i, j) = (row+c.0, col+c.1)
+            if isValid(i, j) && maps[i][j] != "X" && !visit[i][j] {
                 visit[i][j] = true
-                ans.append(findFood(i, j))
+                move(i, j)
             }
         }
     }
-    return ans.isEmpty ? [-1] : ans.sorted(by: <)
+
+    for i in 0..<size.0 {
+        for j in 0..<size.1 {
+            if !visit[i][j] && maps[i][j] != "X" {
+                sum = 0
+                visit[i][j] = true
+                move(i, j)
+                answer.append(sum)
+            }
+        }
+    }
+    
+    return answer.isEmpty ? [-1] : answer.sorted(by:<)
 }
