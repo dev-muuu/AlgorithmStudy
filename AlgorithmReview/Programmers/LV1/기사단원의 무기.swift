@@ -8,19 +8,20 @@
 import Foundation
 
 func solution(_ number:Int, _ limit:Int, _ power:Int) -> Int {
-
-    //약수 개수 구하기
-    var divisor = [Int](repeating: 1, count: number+1)
-    for i in 1...number{
-        var element = i
-        var index = 2
-        while(element * index <= number){
-            divisor[element * index] += 1
-            index += 1
+    
+    var count = [Int](repeating: 1, count: number+1)
+    for i in stride(from: 2, to: number+1, by: +1) {
+        var num = 1
+        while i * num <= number {
+            count[i*num] += 1
+            num += 1
         }
     }
-
-    return divisor[1...number].reduce(0){
-        $1 > limit ? $0 + power : $0 + $1
+    
+    var answer = 0
+    for i in stride(from: 1, to: number+1, by: +1) {
+        answer += count[i] > limit ? power : count[i]
     }
+    
+    return answer
 }
