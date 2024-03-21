@@ -7,29 +7,18 @@
 
 import Foundation
 
-func solution(_ N:Int, _ stages:[Int]) -> [Int] {
+func solution(_ n:Int, _ stages:[Int]) -> [Int] {
     
-    var fail = [Float](repeating: 0, count: N+2)
-    var reach = [Float](repeating: 0, count: N+2)
-    
-    for i in stages{
-        fail[i] += 1
-        for i in 1...i{
-            reach[i] += 1
-        }
+    var count = [(Int, Int)](repeating: (0,0), count: n+1) //스테이지 도달했지만 클리어X 플레이어수, 스테이지에 도달한 플레이어수
+    for s in stages {
+        count[s-1].0 += 1
     }
-    
-    var percentage = [Float](repeating: 0 , count: N)
-    for i in 0..<N{
-        if(reach[i+1] == 0){
-            continue
-        }
-        percentage[i] = fail[i+1] / reach[i+1]
+
+    count[n].1 = count[n].0
+    for i in stride(from: n-1, to: -1, by: -1){
+        count[i].1 = count[i+1].1 + count[i].0
     }
-    
-    return percentage.enumerated().sorted(by: {
-        $0.element == $1.element ? $0.offset < $1.offset : $0.element > $1.element
-    }).map{
-        $0.offset + 1
-    }
+    count.removeLast()
+
+    return count.map{ Float($0)/Float($1) }.enumerated().sorted(by: { $0.1 > $1.1 }).map{ $0.0+1 }
 }
